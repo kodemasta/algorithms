@@ -15,8 +15,8 @@ public class StackArrayImpl<T extends Comparable<T>>  implements Stack<T> {
 
     public StackArrayImpl(int size) {
         top = -1;
-        size = size;
-        array = (T[])Array.newInstance(Comparable.class, size);
+        this.size = size;
+        array = (T[])Array.newInstance(Comparable.class, this.size);
     }
 
     public StackArrayImpl(int size, String name) {
@@ -26,7 +26,7 @@ public class StackArrayImpl<T extends Comparable<T>>  implements Stack<T> {
 
     @Override
     public void push (T value) {
-        if (top == size)
+        if (top == this.size)
             throw new NoSuchElementException();
         array[++top] = value;
     }

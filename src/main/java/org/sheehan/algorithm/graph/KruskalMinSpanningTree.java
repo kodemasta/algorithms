@@ -1,9 +1,9 @@
 package org.sheehan.algorithm.graph;
 
 import org.sheehan.algorithm.data_structures.List;
+import org.sheehan.algorithm.data_structures.graph.AdjacencyListGraph;
 import org.sheehan.algorithm.data_structures.graph.Graph;
 import org.sheehan.algorithm.data_structures.graph.GraphEdge;
-import org.sheehan.algorithm.data_structures.graph.GraphList;
 import org.sheehan.algorithm.data_structures.graph.GraphNode;
 
 import java.util.HashSet;
@@ -17,17 +17,17 @@ import java.util.Set;
 // TODO implement with UNION-FIND to optimise and replace DFS cycle check
 public class KruskalMinSpanningTree <T extends Comparable<T>> {
 
-    private PriorityQueue<GraphEdge<T>> queue = new PriorityQueue<>();
-    Graph<T> mstGraph = new GraphList<>();
+    private PriorityQueue<GraphEdge> queue = new PriorityQueue<>();
+    Graph mstGraph = new AdjacencyListGraph();
 
 
-    public KruskalMinSpanningTree(Graph<T> graph) {
+    public KruskalMinSpanningTree(Graph graph) {
         // build up minheap of all edges
-        Set<GraphEdge<T>> usedEdges = new HashSet<>();
+        Set<GraphEdge> usedEdges = new HashSet<>();
         for (GraphNode node : graph.getNodes()) {
-            List<GraphNode<T>> neighbors = graph.getNeighbors(node);
-            for (GraphNode<T> neighbor: neighbors) {
-                GraphEdge<T> edge = graph.getEdge(node, neighbor);
+            List<GraphNode> neighbors = graph.getNeighbors(node);
+            for (GraphNode neighbor: neighbors) {
+                GraphEdge edge = graph.getEdge(node, neighbor);
                 if (!usedEdges.contains(edge)) {
                     usedEdges.add(edge);
                     queue.add(edge);
@@ -40,7 +40,7 @@ public class KruskalMinSpanningTree <T extends Comparable<T>> {
     public void executeDfs(){
 
         while (queue.peek() != null){
-            GraphEdge<T> edge = queue.remove();
+            GraphEdge edge = queue.remove();
             //check for cycles of dst node
             if (!checkCyclesDfs(edge, mstGraph)) {
                 mstGraph.addUndirectedEdge(edge.srcNode, edge.dstNode, edge.weight);
@@ -54,8 +54,8 @@ public class KruskalMinSpanningTree <T extends Comparable<T>> {
 
     // use BFS searches to search if cycle.
     // search for both nodes of edge and see if the other edge end node is found
-    private boolean checkCyclesDfs(GraphEdge<T> edge, Graph<T> mstGraph) {
-        BFS<T> bfs = new BFS<>(mstGraph);
+    private boolean checkCyclesDfs(GraphEdge edge, Graph mstGraph) {
+        BFS bfs = new BFS(mstGraph);
         bfs.visitIterative(edge.srcNode);
         Set<GraphNode> connected = bfs.getConnected();
 
@@ -66,11 +66,11 @@ public class KruskalMinSpanningTree <T extends Comparable<T>> {
     }
 
     public void printPath() {
-        Set<GraphEdge<T>> usedEdges = new HashSet<>();
+        Set<GraphEdge> usedEdges = new HashSet<>();
         for (GraphNode node : mstGraph.getNodes()) {
-            List<GraphNode<T>> neighbors = mstGraph.getNeighbors(node);
-            for (GraphNode<T> neighbor: neighbors) {
-                GraphEdge<T> edge = mstGraph.getEdge(node, neighbor);
+            List<GraphNode> neighbors = mstGraph.getNeighbors(node);
+            for (GraphNode neighbor: neighbors) {
+                GraphEdge edge = mstGraph.getEdge(node, neighbor);
                 if (!usedEdges.contains(edge)) {
                     usedEdges.add(edge);
                     queue.add(edge);

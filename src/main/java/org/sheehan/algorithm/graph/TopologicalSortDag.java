@@ -16,13 +16,13 @@ import java.util.Set;
 public class TopologicalSortDag<T extends Comparable<T>> {
 
     // Kahn's algorithm
-    public List<GraphNode<T>> topologicalSort(Graph<T> graph) {
-        List<GraphNode<T>> sortedList = new ListImpl<>();
+    public List<GraphNode> topologicalSort(Graph graph) {
+        List<GraphNode> sortedList = new ListImpl<>();
 
         // these have outgoing edges only !
-        Set<GraphNode<T>> noIncomingEdgeNodes = new HashSet<>(graph.getNumV());
+        Set<GraphNode> noIncomingEdgeNodes = new HashSet<>(graph.getNumV());
 
-        for (GraphNode<T> node : graph.getNodes()) {
+        for (GraphNode node : graph.getNodes()) {
             System.out.println("check incoming: " + node);
             if (!graph.hasIncomingEdges(node))
                 noIncomingEdgeNodes.add(node);
@@ -31,12 +31,12 @@ public class TopologicalSortDag<T extends Comparable<T>> {
         while (!noIncomingEdgeNodes.isEmpty()) {
             // remove node from noIncomingEdgeNodes
             // add to tail of sortedList
-            Iterator<GraphNode<T>> iterator = noIncomingEdgeNodes.iterator();
-            GraphNode<T> noIncomingEdgesNode = iterator.next();
+            Iterator<GraphNode> iterator = noIncomingEdgeNodes.iterator();
+            GraphNode noIncomingEdgesNode = iterator.next();
             iterator.remove();
             sortedList.appendBack(noIncomingEdgesNode);
-            for (GraphNode<T> neighbor : graph.getNeighbors(noIncomingEdgesNode)) {
-                GraphEdge<T> edge = graph.getEdge(noIncomingEdgesNode, neighbor);
+            for (GraphNode neighbor : graph.getNeighbors(noIncomingEdgesNode)) {
+                GraphEdge edge = graph.getEdge(noIncomingEdgesNode, neighbor);
                 graph.removeEdge(edge);
 
                 // only add to set if the node has had all incoming edges removed

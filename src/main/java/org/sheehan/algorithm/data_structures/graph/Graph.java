@@ -7,35 +7,36 @@ import java.util.Set;
 /**
  * Created by bob on 8/12/14.
  */
-public interface Graph<T extends Comparable<T>> {
+public interface Graph {
 
     // enqueue directed edge weighted
-    GraphEdge<T>  addDirectedEdge(GraphNode<T> node1, GraphNode<T> node2, int weight);
+    GraphEdge  addDirectedEdge(GraphNode node1, GraphNode node2, int weight);
 
-    java.util.List<GraphEdge<T>> addUndirectedEdge(GraphNode<T> node1, GraphNode<T> node2, int weight);
+    java.util.List<GraphEdge> addUndirectedEdge(GraphNode node1, GraphNode node2, int weight);
 
-    boolean isEdge(GraphNode<T> node1, GraphNode<T> node2);
+    boolean isEdge(GraphNode node1, GraphNode node2);
 
     void printGraph();
 
-    Set<GraphNode<T>> getNodes();
+    Set<GraphNode> getNodes();
 
     int getNumV();
+    int getNumE();
 
-    List<GraphNode<T>> getNeighbors(GraphNode<T> node);
+    List<GraphNode> getNeighbors(GraphNode node);
 
-    Integer getEdgeWeight(GraphNode<T> node1, GraphNode<T> node2);
+    Integer getEdgeWeight(GraphNode node1, GraphNode node2);
 
-    GraphEdge<T> getEdge(GraphNode<T> node1, GraphNode<T> node2);
+    GraphEdge getEdge(GraphNode node1, GraphNode node2);
 
    // T getNode(int i);
 
    // int getNodeIndex(T node);
 
-    GraphNode<T> addNode(GraphNode<T> node);
+    GraphNode addNode(GraphNode node);
 
-    boolean hasIncomingEdges(GraphNode<T> node);
+    boolean hasIncomingEdges(GraphNode node);
 
-    boolean removeEdge(GraphEdge<T> edge);
+    boolean removeEdge(GraphEdge edge);
 
 }

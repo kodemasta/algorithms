@@ -1,38 +1,40 @@
 package org.sheehan.algorithm.data_structures.graph;
 
 
-public class GraphNode<T extends Comparable<T>> implements Comparable<GraphNode<T>>  {
-    static private int idCnt = 0;
-    public int id;
-    public T payload;
+import org.sheehan.algorithm.data_structures.Node;
+
+public class GraphNode extends Node implements Comparable<GraphNode>  {
+
     public boolean visited;
     public int distance = 0; // bfs shortest path, and djikstra requires this
 
-    public GraphNode(T payload)
+    public GraphNode()
     {
-        this.payload = payload;
+        super();
         this.visited = false;
-        this.id = idCnt++;
     }
 
     @Override
     public boolean equals(Object obj){
-        GraphNode<T> node = (GraphNode<T>) obj;
-        return id == node.id;
+        if (!(obj instanceof GraphNode))
+                return false;
+
+        GraphNode node = (GraphNode) obj;
+        return this.id == node.id;
     }
 
     @Override
     public int hashCode(){
-        return id;
+        return this.id;
     }
 
     @Override
-    public int compareTo(GraphNode<T> node) {
-        return this.payload.compareTo(node.payload);
+    public int compareTo(GraphNode node) {
+        return this.id.compareTo(node.id);
     }
 
     @Override
     public String toString(){
-        return "(Node:" + payload + " " + distance + " " + visited +")";
+        return "(Node:" + id + " distance:" + distance + " visited:" + visited +")";
     }
 }

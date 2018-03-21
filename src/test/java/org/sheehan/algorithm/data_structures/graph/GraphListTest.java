@@ -8,12 +8,12 @@ public class GraphListTest {
 
     @Test
     public void testAddEdge() throws Exception {
-        java.util.List<GraphNode<Integer>> nodes = new ArrayList<>();
+        java.util.List<GraphNode> nodes = new ArrayList<>();
         for (int i = 0; i < 7; i++){
-            nodes.add(new GraphNode<Integer>(i));
+            nodes.add(new GraphNode());
         }
 
-        Graph<Integer> graph = new GraphList<Integer>();
+        Graph graph = new AdjacencyListGraph();
         graph.addUndirectedEdge(nodes.get(0), nodes.get(1), 5);
         graph.addUndirectedEdge(nodes.get(0), nodes.get(2), 10);
         graph.addUndirectedEdge(nodes.get(1), nodes.get(3), 6);
@@ -27,12 +27,12 @@ public class GraphListTest {
 
     @Test
     public void testAddDirectedWeightedEdge() throws Exception {
-        java.util.List<GraphNode<Integer>> nodes = new ArrayList<>();
+        java.util.List<GraphNode> nodes = new ArrayList<>();
         for (int i = 0; i < 7; i++){
-            nodes.add(new GraphNode<Integer>(i));
+            nodes.add(new GraphNode());
         }
 
-        Graph<Integer> graph = new GraphList<Integer>();
+        Graph graph = new AdjacencyListGraph();
         graph.addDirectedEdge(nodes.get(0), nodes.get(1), 5);
         graph.addDirectedEdge(nodes.get(0), nodes.get(2), 10);
         graph.addDirectedEdge(nodes.get(1), nodes.get(3), 6);

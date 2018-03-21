@@ -13,18 +13,19 @@ import org.sheehan.algorithm.data_structures.stack.StackArrayImpl;
  *
  * no shortest paths
  */
-public class DFS <T extends Comparable<T>>{
+public class DFS {
     private boolean marked[];
-    private final Graph<T> graph;
+    private final Graph graph;
 
     public DFS(Graph graph){
         marked = new boolean[graph.getNumV()];
         this.graph = graph;
     }
 
-    public void visitRecursion(GraphNode<T> v){
+    // recursion simulates explicit use of stack with runtime function stack
+    public void visitRecursion(GraphNode v){
         v.visited = true;
-        for(GraphNode<T> node: graph.getNeighbors(v)){
+        for(GraphNode node: graph.getNeighbors(v)){
             if (!node.visited && graph.isEdge(v, node))
                 visitRecursion(node);
         }
@@ -32,14 +33,14 @@ public class DFS <T extends Comparable<T>>{
 
 
     // use a stack for DFS - SAME AS BFS with stack instead of queue
-    public void visitIterative(GraphNode<T> sourceNode){;
-        Stack<GraphNode<T>> stack = new StackArrayImpl<>(graph.getNumV());
+    public void visitIterative(GraphNode sourceNode){;
+        Stack<GraphNode> stack = new StackArrayImpl<>(this.graph.getNumV());
         stack.push(sourceNode);
         sourceNode.visited = true; // mark after adding to queue
         while (stack.peek() != null) {
-            GraphNode<T> node = stack.pop();
-            List<GraphNode<T>> neighbors = graph.getNeighbors(node);
-            for (GraphNode<T> neighbor: neighbors){
+            GraphNode node = stack.pop();
+            List<GraphNode> neighbors = graph.getNeighbors(node);
+            for (GraphNode neighbor: neighbors){
                 if (!neighbor.visited) {
                     stack.push(neighbor);
                     neighbor.visited = true; // mark after adding to queue
@@ -51,13 +52,13 @@ public class DFS <T extends Comparable<T>>{
 
     public void printConnected() {
         System.out.print("connected: ");
-        for (GraphNode<T> node: graph.getNodes()){
+        for (GraphNode node: graph.getNodes()){
             if (node.visited)
                 System.out.print(node + " ");
         }
         System.out.println();
         System.out.print("not connected: ");
-        for (GraphNode<T> node: graph.getNodes()){
+        for (GraphNode node: graph.getNodes()){
             if (!node.visited)
                 System.out.print(node + " ");
         }

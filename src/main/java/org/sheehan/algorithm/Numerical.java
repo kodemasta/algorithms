@@ -19,7 +19,7 @@ public class Numerical {
         path += String.format(" (%d,%d)", i , j);
         if( i ==n && j == n){ //reach the (n,n) point
             pathList.add(path);
-        }else if( i > n || j > n){//wrong way
+        } else if( i > n || j > n){//wrong way
             return;
         }else {
             robotPaths(n, i+1, j, path, pathList);

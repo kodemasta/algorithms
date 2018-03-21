@@ -17,55 +17,50 @@ public class Bits {
         return n;
     }
 
+    // xor each bit
     static int flipBits(int n){
-
-        // xor each bit
-        for (int i = 0; i < 32; i++){
+        for (int i = 0; i < 32; i++)
             n ^= 1<<i;
-        }
-
         return n;
     }
 
-    public String addBinaryStrings(String a, String b) {
-        char aChars[]=a.toCharArray();
-        char bChars[]=b.toCharArray();
-        StringBuilder sb = new StringBuilder();
+    // just xor against -1 integer (all 1s)
+    static int flipBits2(int n){
+        int mask = -1;
+        // or mask = ~0;
+        return n^mask;
+    }
 
-        int i=aChars.length-1;
-        int j=bChars.length-1;
+    // just use ~ (inverse operator)
+    static int flipBits3(int n){
+        return ~n;
+    }
+
+    public static int add(int a, int b){
+        int sum = 0;
         int carry = 0;
 
-        while(i>=0 || j>=0 || carry==1){
-
-            // get char and decrement
-            int aVal=0;
-            if (i>=0)
-                aVal=(int)(aChars[i--]-'0');
-            int bVal=0;
-            if (j>=0)
-                bVal=(int)(bChars[j--]-'0');
-
-            // sum and handle cases
-            int sum = aVal+bVal+carry;
-            if (sum==0){
-                sb.insert(0,'0');
-            }
-            else if (sum==1){
-                sb.insert(0,'1');
-                carry=0;
-            }
-            else if (sum==2){
-                sb.insert(0,'0');
-                carry=1;
-            }
-            else if (sum==3){
-                sb.insert(0,'1');
-                carry=1;
+        for (int i=0; i < 32; ++i){
+            int aBit = (a>>i)&1;
+            int bBit = (b>>i)&1;
+            int sumBit = aBit + bBit + carry;
+            if (sumBit==1) {
+                sum += Math.pow(2,i);
+                carry = 0;
+            } else if (sumBit==2){
+                //sum += Math.pow(2,i);
+                carry = 1;
+            }   else if (sumBit==3){
+                //sum += Math.pow(2,i);
+                sum += Math.pow(2,i);
+                carry = 1;
             }
         }
+        return sum;
+    }
 
-        return sb.toString();
+    public static String add(String a, String b) {
+        return String.valueOf(add(str2Int(a), str2Int(b)));
     }
 
     public static int longsetRun(int n){
@@ -85,19 +80,8 @@ public class Bits {
         return max;
     }
 
-//    public static int reverse(int n) {
-//        int reverse = 0;
-//        for (int i = 0; i < 32; i++) {
-//            int digit = (n >> i) & 1;
-//            reverse |= digit;
-//            if (i!=31)
-//                reverse <<= 1;
-//        }
-//        return reverse;
-//    }
-
     public static int reverse(int n) {
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 16; i++) { // just to half way or else you unswap the swap !
             n = swapBits(n, i, 32 - i - 1);
         }
 
@@ -105,16 +89,21 @@ public class Bits {
     }
 
     public static int swapBits(int n, int i, int j) {
-        int a = (n >> i) & 1;
+        int a = (n >> i) & 1; // masking with 1 gives either 1 or 0
         int b = (n >> j) & 1;
 
-        if ((a ^ b) != 0) {
+        if ((a ^ b) != 0) { // if they are different
             //print((1 << i) | (1 << j));
             //System.out.println();
-            return n ^= (1 << i) | (1 << j);
+            return n ^= (1 << i) | (1 << j); //xor does the swap
         }
 
         return n;
+    }
+
+    public static int swapNibbles(int n) {
+
+        return ((n & 0xF0)>>4)|((n & 0x0F) <<4);
     }
 
 
@@ -147,16 +136,29 @@ public class Bits {
         System.out.println();
     }
 
-    //shift the number right and mask with 1
-    static int countOnes(int n){
-
-        int cnt = 0;
-        for (int i = 0; i < 32; i++){
-            if ( (n >> (31-i) & 1) == 1 )
-               cnt++;
+    // left to right LSB swap
+    static int getSameWeightNearestInt(int n){
+        for (int i = 0; i < 31; i++){
+            int leftBit = ((n >> i) & 1);
+            int nextBit = ((n >> i+1) & 1);
+            if (leftBit != nextBit) {
+                return (swapBits(n, i, i + 1));
+            }
         }
 
-        return cnt;
+        return n; //not found
+    }
+
+    //get number of ones
+    static int getWeight(int n){
+
+        int weight = 0;
+        for (int i = 0; i < 32; i++){
+            if (( (n >> i) & 1) == 1 ) //shift and mask with 1 to get 0 or 1, compare
+                weight++;
+        }
+
+        return weight;
     }
 
     public static void replaceSubstr(int num, int replaceNum, int i, int j){
@@ -167,6 +169,8 @@ public class Bits {
             mask ^= (1<<index);
         }
 
+        // e.g. 1111111100001111
+
         // blank out the target number in range to 0's
         num &= mask;
 
@@ -176,5 +180,23 @@ public class Bits {
         // simply or them together now !
         print(num|replaceNum);
 
+    }
+
+    public static void rotate(int num, int n, boolean left){
+        int mask = 0;
+        for (int i = 0; i < n; ++i){
+            mask |= (1 << i);
+        }
+        int chopped = 0;
+        if (left) {
+            chopped = (num >> (32 - n)) & mask;
+            num = num << n;
+        }else {
+            chopped = num & mask;
+            num = num >>> n;
+        }
+
+        num |=chopped;
+        print( num);
     }
 }

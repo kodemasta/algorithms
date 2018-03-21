@@ -98,6 +98,16 @@ public class ArrayTest {
         Array.print(array);
         int run[] = Array.longestRun(array);
         System.out.println("longest run is: " + run[0]+":"+run[1]);
+    }
+
+    @Test
+    public void testMergedArrays() {
+        Integer array1[] = Array.create(Array.ArrayType.RANDOM_SORTED, 10, 20);
+        Array.print(array1);
+        Integer array2[] = Array.create(Array.ArrayType.RANDOM_SORTED, 10, 20);
+        Array.print(array2);
+        Integer merged[] = Array.merge(array1, array2);
+        Array.print(merged);
 
     }
 }

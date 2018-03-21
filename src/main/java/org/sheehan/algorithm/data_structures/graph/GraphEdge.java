@@ -1,15 +1,15 @@
 package org.sheehan.algorithm.data_structures.graph;
 
 
-public class GraphEdge<T extends Comparable<T>> implements Comparable<GraphEdge<T>> {
+public class GraphEdge implements Comparable<GraphEdge> {
     static public int idCnt = 0;
     public int id;
-    public GraphNode<T> dstNode;
-    public GraphNode<T> srcNode; //optional - not needed for adjacency list impl below
+    public GraphNode dstNode;
+    public GraphNode srcNode; //optional - not needed for adjacency list impl below
     public Integer weight = 1;
     public boolean visited; // used for topo sort
 
-    public GraphEdge(GraphNode<T> node1, GraphNode<T> node2, Integer weight)
+    public GraphEdge(GraphNode node1, GraphNode node2, Integer weight)
     {
         this.srcNode = node1;
         this.dstNode = node2;
@@ -18,14 +18,14 @@ public class GraphEdge<T extends Comparable<T>> implements Comparable<GraphEdge<
     }
 
     @Override
-    public int compareTo(GraphEdge<T> edge) {
+    public int compareTo(GraphEdge edge) {
         return this.weight.compareTo(edge.weight);
     }
 
     @Override
     public boolean equals(Object obj){
-        GraphEdge<T> edge = (GraphEdge<T>) obj;
-        return id == edge.id;
+        GraphEdge edge = (GraphEdge) obj;
+        return (this.srcNode.id == edge.srcNode.id ) && (this.dstNode.id == edge.dstNode.id);
     }
 
     @Override
@@ -35,6 +35,6 @@ public class GraphEdge<T extends Comparable<T>> implements Comparable<GraphEdge<
 
     @Override
     public String toString(){
-        return "[" + srcNode.toString()+"-"+dstNode.toString() + " edge:" + weight + " visited:" + visited + "]";
+        return "[" + +srcNode.id+"-"+dstNode.id + " (" + this.weight +")"+"]";
     }
 }

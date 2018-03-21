@@ -5,7 +5,7 @@ package org.sheehan.algorithm.dynamic_programming;
  */
 public class MinChange {
 
-    // solution matrix is (# of coin types, number of cents) e.g. 4 X 100 for 4 US coins and 100cents
+    // solution matrix is (# of coin types, number of cents) e.g. 4 X 100 for 4 US coins and 100 cents
     static public int minChange(int[] denom, int targetAmount) {
         int actualAmount;
         int m = denom.length + 1;
@@ -13,7 +13,7 @@ public class MinChange {
         int inf = Integer.MAX_VALUE - 1;
 
         int[][] table = new int[m][n];
-        for(int i = 0; i< m; ++i) {
+        for(int i = 0; i < m; ++i) {
             for (int j = 1; j < n; j++) {
                 table[i][j] = inf;
             }

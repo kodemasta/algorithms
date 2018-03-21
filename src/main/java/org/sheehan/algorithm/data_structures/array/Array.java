@@ -99,7 +99,7 @@ public class Array {
 
     }
 
-    // median of medians pivot selection gaurantees O(n) instead of just average (which has worst O(n2)
+    // median of medians pivot selection guarantees O(n) instead of just average (which has worst O(n2)
     public static int partition2(Integer array[], int pivotIndex, int firstIndex, int lastIndex){
         int pivot = array[pivotIndex];
         swap(array, pivotIndex, lastIndex); // save pivot
@@ -144,6 +144,30 @@ public class Array {
         array[j]=temp;
     }
 
+    public static Integer[] merge(Integer[] array1, Integer[] array2) {
+        Integer merged[] = new Integer[array1.length + array2.length];
+
+        int cnt1 = 0, cnt2 = 0;
+        int index = 0;
+
+        while(cnt1 < array1.length && cnt2 < array2.length){
+            if (array1[cnt1] < array2[cnt2])
+                merged[index++] = array1[cnt1++];
+            else
+                merged[index++] = array2[cnt2++];
+        }
+
+        while(cnt1 < array1.length ){
+            merged[index++] = array1[cnt1++];
+        }
+
+        while(cnt2 < array2.length ){
+            merged[index++] = array2[cnt2++];
+        }
+        return merged;
+
+    }
+
     public static int[] longestRun(Integer[] array) {
         int val = array[0];
         int maxLength = 0;
@@ -161,8 +185,8 @@ public class Array {
             val = array[i];
         }
 
-        int run[] = {maxVal,maxLength};
+        int soln[] = {maxVal,maxLength};
 
-        return run;
+        return soln;
     }
 }

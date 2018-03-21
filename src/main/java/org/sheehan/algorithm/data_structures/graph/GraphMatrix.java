@@ -1,4 +1,4 @@
-package org.sheehan.algorithm.graph;
+package org.sheehan.algorithm.data_structures.graph;
 
 /*
 /**
@@ -108,7 +108,7 @@ public class GraphMatrix <T extends Comparable<T>> implements Graph<T> {
     }
 
     @Override
-    public GraphList.Edge<T> getEdge(T node1, T node2) {
+    public AdjacencyListGraph.Edge<T> getEdge(T node1, T node2) {
         //TODO implement this !
         return null;
     }
