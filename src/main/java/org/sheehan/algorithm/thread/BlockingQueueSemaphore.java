@@ -20,28 +20,53 @@ public class BlockingQueueSemaphore<T extends Comparable<T>> {
         semaphore=new Semaphore(capacity);
     }
 
+    // when threads add they acquire. We only want a limited number of threads to add
     public void add(T val) throws InterruptedException {
-        System.out.println("trying to add, available permits " + semaphore.availablePermits());
-        semaphore.acquire();
-        System.out.println("added available permits " + semaphore.availablePermits());
-        queue.add(val);
-    }
-
-    public T remove() throws InterruptedException {
         try {
-            T val = queue.remove();
-            return val;
-        }finally{
-            semaphore.release();
-            System.out.println("removed available permits " + semaphore.availablePermits());
-        }
+
+            // TEST IF PERMITS ARE AVAILABLE, IF NOT SKIP
+            // IF THERE ARE FEW PERMITS AND LOTS OF THREADS MANY WILL BE SKIPPED
+            // KIND OF A THROTTLE
+            if (!semaphore.tryAcquire(1)) {
+                System.out.println("...cannot acquire semaphore to add " + val + ", available permits " + semaphore.availablePermits());
+                System.out.println("skipped " + val);
+                return;
+            }
+            System.out.println("...acquiring semaphore to add " + val + ", available permits " + semaphore.availablePermits());
+
+            queue.add(val);
+            System.out.println("added " + val);
+
+            // RELEASE PERMIT. DONE WITH TASK
+            semaphore.release(1);
+            System.out.println("...released semaphore to add " + val + ", available permits " + semaphore.availablePermits());
+
+        } finally { }
     }
 
-    synchronized public void printQueue(){
+    // when threads remove they release toa llow more threads to add.
+    public int remove() throws InterruptedException {
+//        try {
+//
+//            T val = queue.remove();
+//
+//            System.out.println("removed " + val);
+//            //printQueue();
+//            return val;
+//        } finally {
+//            semaphore.release(1);
+//            System.out.println("...released semaphore to remove, available permits " + semaphore.availablePermits());
+//        }
+
+        return 0;
+    }
+
+    public void printQueue(){
+        System.out.print('{');
         queue.forEach(x-> {
               System.out.print(" ");
               System.out.print(x);
         });
-        System.out.println();
+        System.out.println(" }");
     }
 }

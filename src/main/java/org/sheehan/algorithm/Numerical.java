@@ -62,7 +62,7 @@ public class Numerical {
 
         // mark non-primes <= N using Sieve of Eratosthenes
         //int upperlimit = (int)(Math.sqrt(n));
-        for (int i = 2; i <= n*n; i++) {
+        for (int i = 2; i <= Math.sqrt(n); i++) {
 
             // if i is prime, then mark multiples of i as nonprime
             // suffices to consider multiples i, i+1, ..., N/i

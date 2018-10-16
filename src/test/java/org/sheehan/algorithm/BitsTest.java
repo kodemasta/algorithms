@@ -44,6 +44,26 @@ public class BitsTest {
     }
 
     @Test
+    public void testSwapEvenOdd() throws Exception {
+        int num = 0xAAAAAAAA;
+        System.out.println(num);
+        Bits.print(num);
+        int prod = Bits.swapEvenOdd(num);
+        System.out.println(prod);
+        Bits.print(prod);
+    }
+
+    @Test
+    public void testMultiply() throws Exception {
+        int a = 0x00000011;
+        int b = 0x00000010;
+        System.out.print(a + " * " + b +" = " +  (a*b) + " ");
+        int prod = Bits.multiply(a, b);
+        System.out.print(prod + " ");
+        Bits.print(prod);
+    }
+
+    @Test
     public void testGetSameWeightNearestInt() {
         int inputVal = 10;
         System.out.print(inputVal + " ");

@@ -9,6 +9,9 @@ public class CyclicBarrierExample {
 
     static class MyService implements Runnable {
 
+
+        // a global barrier exists across all threads
+        // Last thread to meet limit runs first.. then in order of arrival
         CyclicBarrier barrier;
         String name;
 
@@ -20,9 +23,10 @@ public class CyclicBarrierExample {
         @Override
         public void run() {
             try {
-                System.out.println(this.name + " waiting run " + barrier.getParties());
-                barrier.await();
-                System.out.println(this.name + " completed run " + barrier.getParties());
+                // threads waiting
+                System.out.println(this.name + " waiting " + barrier.getNumberWaiting() + " of " + barrier.getParties());
+                int arrivalIndex = barrier.await();
+                System.out.println(this.name + " arrival Index " +  arrivalIndex + " tripped " + barrier.getNumberWaiting() + " of " + barrier.getParties());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (BrokenBarrierException e) {
@@ -35,12 +39,12 @@ public class CyclicBarrierExample {
     }
 
     public static void main(String []args) throws InterruptedException, BrokenBarrierException {
-        CyclicBarrier barrier = new CyclicBarrier(5);
+        CyclicBarrier barrier = new CyclicBarrier(5, () -> System.out.println("BARRIER TRIPPED"));
 
         ExecutorService executor = Executors.newFixedThreadPool(5);
 
         for (int i=0; i<5; ++i){
-            executor.submit(new MyService(String.valueOf(i), barrier));
+            executor.submit(new MyService("BOB'S THREAD " + String.valueOf(i), barrier));
         }
 
 
