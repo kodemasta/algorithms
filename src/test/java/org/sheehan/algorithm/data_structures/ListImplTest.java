@@ -164,14 +164,11 @@ public class ListImplTest {
 
     @Test
     public void testCycle() {
+        // make list from array
         List<Integer> list = new ListImpl<Integer>();
-
         Integer[] array = Array.createArray(10, 100, false);
-
-        for(int arr_i:array){
+        for(int arr_i:array)
             list.insertInOrder(arr_i);
-        }
-
 
         list.print();
 

@@ -353,32 +353,35 @@ public class ListImpl <T extends Comparable<T>> implements List<T> {
     @Override
     public void introduceCycleForTest() {
 
-        // get to tail so tail can point to some random node
-        Node tail = this.head;
-        while (tail.next != null) {
-            tail = tail.next;
-        }
+//        // get to tail so tail can point to some random node
+//        Node tail = this.head;
+//        while (tail.next != null) {
+//            tail = tail.next;
+//        }
 
         Random random = new Random();
-        int start = random.nextInt(size() - 1);
+        int index1 = random.nextInt(size() - 1);
 
-        Node startNode = this.head;
-        for (int i = 0; i < start; ++i) {
-            startNode = startNode.next;
+        Node node1 = this.head;
+        for (int i = 0; i < index1; ++i) {
+            node1 = node1.next;
         }
 
-        int stop = random.nextInt(size() - 1);
+        int index2 = random.nextInt(size() - 1);
 
-        Node stopNode = this.head;
-        for (int i = 0; i < stop; ++i) {
-            stopNode = stopNode.next;
+        Node node2 = this.head;
+        for (int i = 0; i < index2; ++i) {
+            node2 = node2.next;
         }
 
         // make loop !
-        startNode.next =stopNode;
+        if (index2 < index1)
+            node1.next = node2;
+        else
+            node2.next = node1;
 
-        System.out.println("created cycle start: " + stopNode.data);
-        System.out.println("created cycle end: " + startNode.data);
+        System.out.println("created cycle start: " + node2.data);
+        System.out.println("created cycle end: " + node1.data);
     }
 
     @Override
@@ -410,7 +413,6 @@ public class ListImpl <T extends Comparable<T>> implements List<T> {
         }
 
         // set slow node to cycle length from head
-        Node cycleNode = null;
         slow=this.head;
         while(cycleLength!=0){
             cycleLength--;
