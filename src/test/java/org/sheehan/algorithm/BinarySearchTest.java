@@ -2,6 +2,7 @@ package org.sheehan.algorithm;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.sheehan.algorithm.data_structures.array.Array;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,7 +21,7 @@ public class BinarySearchTest {
 
     @Test
     public void testBinarySearch() throws Exception {
-        Integer[] array = Array.createArray(100, 200, true);
+        Integer[] array = Array.create(Array.ArrayType.RANDOM_SORTED, 10, 100);
 
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + " ");
@@ -34,7 +35,7 @@ public class BinarySearchTest {
 
     @Test
     public void testRotatedBinarySearchRecursive() throws Exception {
-        Integer[] sortedArray = Array.createArray(20, 100, true);
+        Integer[] sortedArray =  Array.create(Array.ArrayType.RANDOM_SORTED, 10, 100);
         Array.print(sortedArray);
         Array.rotateArray(sortedArray, 5);
         Array.print(sortedArray);

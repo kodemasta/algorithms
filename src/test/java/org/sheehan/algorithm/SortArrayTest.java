@@ -2,6 +2,7 @@ package org.sheehan.algorithm;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.sheehan.algorithm.data_structures.array.Array;
 import org.sheehan.algorithm.sort.SortArray;
 
 import java.util.Arrays;
@@ -10,7 +11,7 @@ public class SortArrayTest {
 
     @Test
     public void testBubbleSort() throws Exception {
-        Integer array[] = Array.createArray(20, 100, false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
 
         System.out.println("bubble");
         System.out.println(Arrays.toString(array));
@@ -23,13 +24,13 @@ public class SortArrayTest {
 
     @Test
     public void testBubbleSortPolarity() throws Exception {
-        Integer array[] = Array.createArray(10, 10, false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
 
         SortArray.bubbleSortPolarity(array);
         System.out.println(Arrays.toString(array));
         System.out.println();
 
-        array = Array.createArray(10, 10, false);
+        array = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
 
         SortArray.bubbleSortPolarity(array);
         System.out.println(Arrays.toString(array));
@@ -47,7 +48,7 @@ public class SortArrayTest {
         System.out.println(Arrays.toString(array));
         System.out.println();
 
-        array = Array.createArray(10, 10, false);
+        array = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
         System.out.println(Arrays.toString(array));
         System.out.println();
 
@@ -73,7 +74,7 @@ public class SortArrayTest {
 
     @Test
     public void testHeapSort() throws Exception {
-        Integer array[] = Array.createArray(10,10, false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
 
         System.out.println("heap");
         System.out.println(Arrays.toString(array));
@@ -86,7 +87,7 @@ public class SortArrayTest {
 
     @Test
     public void testSelectionSort() throws Exception {
-        Integer array[] = Array.createArray(10,10, false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
 
         System.out.println("selection");
         System.out.println(Arrays.toString(array));
@@ -98,7 +99,7 @@ public class SortArrayTest {
 
     @Test
     public void testSelectionSortRecursive() throws Exception {
-        Integer array[] = Array.createArray(10,10, false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
 
         System.out.println("selection recurse");
         System.out.println(Arrays.toString(array));
@@ -111,7 +112,7 @@ public class SortArrayTest {
 
     @Test
     public void testMergeSort() throws Exception {
-        Integer array[] = Array.createArray(10,10, false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
 
         int array2[] = {8,2,3,4,5,6,7,1};
 
@@ -127,7 +128,7 @@ public class SortArrayTest {
     // simple merge of ints
     @Test
     public void testMergeSort2() throws Exception {
-        Integer array[] = Array.createArray(10,10, false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
         int array2[] = new int[array.length];
         for (int i = 0; i < array.length; i++)
             array2[i]=array[i];
@@ -142,7 +143,7 @@ public class SortArrayTest {
 
     @Test
     public void testQuickSortSelect() throws Exception {
-        Integer array[] = Array.createArray(10,20,false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
 
         System.out.println("quick-select");
 
@@ -154,7 +155,7 @@ public class SortArrayTest {
 
     @Test
     public void testQuickSort() throws Exception {
-        Integer array[] = Array.createArray(10,100,false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
 
         System.out.println("quick");
         org.sheehan.algorithm.data_structures.array.Array.print(array);
@@ -168,7 +169,7 @@ public class SortArrayTest {
 
     @Test
     public void testCountingSort() throws Exception {
-        Integer array[] = Array.createArray(10,20,false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
 
         System.out.println("counting");
         System.out.println(Arrays.toString(array));
@@ -180,7 +181,7 @@ public class SortArrayTest {
 
     @Test
     public void testCountingSort2() throws Exception {
-        Integer array[] = Array.createArray(10,20,false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 10);
 
         System.out.println("counting");
         System.out.println(Arrays.toString(array));
@@ -192,7 +193,7 @@ public class SortArrayTest {
 
     @Test
     public void testRadixSortLsd() throws Exception {
-        Integer array[] = Array.createArray(10,20,false);
+        Integer array[] =Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 100);
 
         System.out.println("radix lsd");
         System.out.println(Arrays.toString(array));
@@ -204,7 +205,7 @@ public class SortArrayTest {
 
     @Test
     public void testRadixSortBinaryLsd() throws Exception {
-        Integer array[] = Array.createArray(10,20,false);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_UNSORTED, 10, 100);
 
         System.out.println("radix lsd");
         System.out.println(Arrays.toString(array));

@@ -2,7 +2,7 @@ package org.sheehan.algorithm.data_structures;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.sheehan.algorithm.Array;
+import org.sheehan.algorithm.data_structures.array.Array;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -94,7 +94,7 @@ public class ListImplTest {
     @Test
     public void testInsertInOrder() throws Exception {
 
-        Integer array1[] = Array.createArray(20, 100, false);
+        Integer array1[] = Array.create(Array.ArrayType.RANDOM_UNSORTED_UNIQUE, 10, 10);
 
         List<Integer> list = new ListImpl<Integer>();
 
@@ -166,7 +166,7 @@ public class ListImplTest {
     public void testCycle() {
         // make list from array
         List<Integer> list = new ListImpl<Integer>();
-        Integer[] array = Array.createArray(10, 100, false);
+        Integer[] array = Array.create(Array.ArrayType.RANDOM_UNSORTED_UNIQUE, 10, 10);
         for(int arr_i:array)
             list.insertInOrder(arr_i);
 
@@ -213,7 +213,7 @@ public class ListImplTest {
 
     @Test
     public void testInsertionSortList() throws Exception {
-        Integer array[] = Array.createArray(10,10, true);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_SORTED, 10, 10);
         ListImpl<Integer> list = new ListImpl<>();
         list.appendBack(5);
         list.appendBack(10);

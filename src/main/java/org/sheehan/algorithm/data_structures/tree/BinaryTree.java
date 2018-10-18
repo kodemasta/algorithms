@@ -195,14 +195,21 @@ public class BinaryTree<K extends Comparable<? super K>, V> {
         int offset = Math.abs(depth1-depth2);
 
         //traverse deeper up to same level.
-        while(offset !=0)
-            deeper=deeper.parent;
+        while(offset != 0 && deeper != null) {
+            deeper = deeper.parent;
+            System.out.println("deeper up leveled to: " + deeper.toString());
+            depth1 = getDepth(root, deeper.key, 0);
+            depth2 = getDepth(root, shallower.key, 0);
+            offset = Math.abs(depth1-depth2);
+        }
+
+
 
         while(deeper != null){
             if (deeper.key.equals(shallower.key))
                 return deeper;
-            deeper=deeper.parent;
-            shallower=shallower.parent;
+            deeper = deeper.parent;
+            shallower = shallower.parent;
         }
 
         return null;

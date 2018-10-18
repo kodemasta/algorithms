@@ -80,11 +80,11 @@ public class ArrayTest {
         Array.print(array);
         int partition = Array.partitionOddEven(array, 0, array.length-1);
         Array.print(array);
-        for (int i=0; i<=partition; ++i){
-            assertTrue(array[i]%2==0);
+        for (int i=0; i<partition; ++i){
+            assertTrue("partition:" + partition + " element should be even:" + array[i], array[i]%2==0);
         }
         for (int i=partition+1; i<array.length; ++i){
-            assertTrue(array[i]%2==1);
+            assertTrue("partition:" + partition + " element should be odd:" + array[i], array[i]%2==1);
         }
         Integer dest[] = new Integer[partition+1];
         System.arraycopy(array, 0, dest, 0,partition+1);

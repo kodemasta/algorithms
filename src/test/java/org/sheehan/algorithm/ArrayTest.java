@@ -2,6 +2,7 @@ package org.sheehan.algorithm;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.sheehan.algorithm.data_structures.array.Array;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -52,7 +53,7 @@ public class ArrayTest {
 
     @Test
     public void testInsertAt() {
-        Integer array1[] = Array.createArray(10, 10, true);
+        Integer array1[] =  Array.create(Array.ArrayType.RANDOM_SORTED, 10, 10);
         Array.print(array1);
 
         Integer copy[] = Array.insertAt(array1, 6, 100);
@@ -93,17 +94,17 @@ public class ArrayTest {
 
         @Test
     public void testMaxDiff() {
-        Integer array1[] = Array.createArray(5, 20, true);
+        Integer array1[] = Array.create(Array.ArrayType.RANDOM_SORTED, 10, 10);
         Array.print(array1);
         System.out.print(Array.maxDiff(array1));
-        array1 = Array.createArray(5, 1000, true);
+        array1 = Array.create(Array.ArrayType.RANDOM_SORTED, 5, 100);
         Array.print(array1);
         System.out.print(Array.maxDiff(array1));
     }
 
     @Test
     public void testKnuthShuffle() {
-        Integer array1[] = Array.createArray(20, 100, true);
+        Integer array1[] = Array.create(Array.ArrayType.RANDOM_SORTED, 10, 100);
          Array.print(array1);
         Array.shuffle(array1);
     }
@@ -199,7 +200,7 @@ public class ArrayTest {
 
     @Test
     public void testRotateArray() {
-        Integer array[] = Array.createArray(20, 100, true);
+        Integer array[] = Array.create(Array.ArrayType.RANDOM_SORTED, 10, 100);
 
         Array.print(array);
         Array.rotateArray(array, 5);
@@ -209,8 +210,8 @@ public class ArrayTest {
 
     @Test
     public void testMergeSortedArrays() {
-        Integer array1[] = Array.createArray(20, 100, true);
-        Integer array2[] = Array.createArray(20, 100, true);
+        Integer array1[] = Array.create(Array.ArrayType.RANDOM_SORTED, 10, 100);
+        Integer array2[] = Array.create(Array.ArrayType.RANDOM_SORTED, 10, 100);
         Array.print(array1);
         Array.print(array2);
 
@@ -224,16 +225,15 @@ public class ArrayTest {
     @Test
     public void testTwoSum() {
 
-        boolean test = false;
-        while(!test){
-            Integer array1[] = Array.createArray(20, 100, true);
-
-
-            test = Array.isTwoSum(array1, 80);
-            if (test){
-                Array.print(array1);
-            }
-        }
+//        boolean test = false;
+//        while(!test){
+//            Integer array1[] = Array.create(Array.ArrayType.RANDOM_SORTED, 10, 10);
+//
+//            test = Array.isTwoSum(array1, 80);
+//            if (test){
+//                Array.print(array1);
+//            }
+//        }
 
 
     }

@@ -1,7 +1,8 @@
 package org.sheehan.algorithm.data_structures.tree;
 
 import org.junit.Test;
-import org.sheehan.algorithm.Array;
+
+import org.sheehan.algorithm.data_structures.array.Array;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +109,7 @@ public class BinaryTreeTest {
     public void testFromSortedArray() throws Exception {
 
         BinaryTree<Integer, Integer> tree = new BinaryTree<Integer, Integer>(null);
-        tree.insertSortedArray(Array.createUniqueArray(20, 21, true));
+        tree.insertSortedArray(Array.create(Array.ArrayType.RANDOM_UNSORTED_UNIQUE, 20, 20));
 
         int height = tree.getMaxDepth(tree.root);
         for (int i = 0; i < height; ++i) {
@@ -121,7 +122,7 @@ public class BinaryTreeTest {
             System.out.println("Node 1: " + node1.toString());
         BinaryTree.TreeNode<Integer, Integer> node6 = tree.getNode(tree.root, 6);
         if (node6 != null)
-            System.out.println("Node 6: " + node1.toString());
+            System.out.println("Node 6: " + node6.toString());
 
         BinaryTree.TreeNode<Integer, Integer> lca = tree.getLcaUsingParent(tree.root, tree.getNode(tree.root, 1), tree.getNode(tree.root, 6));
         System.out.println("LCA for 1 and 6 is: " + lca.toString());
@@ -172,7 +173,7 @@ public class BinaryTreeTest {
     public void testInsertSortedArray() throws Exception {
         BinaryTree tree = new BinaryTree();
 
-        Integer[] array = Array.createUniqueArray(20, 100, true);
+        Integer[] array = Array.create(Array.ArrayType.RANDOM_SORTED, 20, 100);
         tree.insertSortedArray(array);
 
         int height = tree.getMaxDepth(tree.root);
