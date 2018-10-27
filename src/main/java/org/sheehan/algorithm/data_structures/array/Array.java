@@ -308,7 +308,7 @@ public class Array {
     }
 
     // knuth shuffle O(n)
-    // left side of i is shuffled
+    // left side of i is shuffled invariant
     public static <T> void shuffle(T array[]){
 
         Random r = new Random();
@@ -690,10 +690,14 @@ public class Array {
     public static boolean isTwoSum(Integer[] array, int sum){
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
+        // cache the difference between sum and each element
         for (int i=0; i < array.length; ++i){
             map.put(array[i], sum-array[i]);
         }
 
+
+        // no check if that difference value exists in array. If it does then we already know a[i] exists, so
+        // now we know that difference is also available as a[j] therefore a[i] + a[j] = sum and both are in array.
         for (int i=0; i < array.length; ++i){
             int j = map.get(array[i]);
             if (map.get(j)!=null) {

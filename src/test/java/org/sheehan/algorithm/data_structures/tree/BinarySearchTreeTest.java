@@ -2,6 +2,7 @@ package org.sheehan.algorithm.data_structures.tree;
 
 import org.junit.Test;
 import org.sheehan.algorithm.data_structures.ListImpl;
+import org.sheehan.algorithm.data_structures.array.Array;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,16 @@ public class BinarySearchTreeTest {
 
     @Test
     public void testInsertSortedList() throws Exception {
-        Integer array[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+        Integer array[] = Array.create(Array.ArrayType.LINEAR_SORTED, 10,10);
         org.sheehan.algorithm.data_structures.ListImpl<Integer> list = new ListImpl<Integer>();
         for (int arr_i:array)
             list.appendBack(arr_i);
 
         BinarySearchTree<Integer,Integer> bst = new BinarySearchTree<>();
-        bst.insertSortedList(list.head);
+        bst.insertSortedList(list);
+
+        System.out.println("TREE");
+        bst.printLevels();
         System.out.println("PATHS");
         List<String> paths = new ArrayList<String>();
         bst.getPaths(bst.root, paths, "");
@@ -27,6 +31,7 @@ public class BinarySearchTreeTest {
             System.out.println(s);
         }
 
+        System.out.println("PATH SUMS");
         List<Integer> pathSums = new ArrayList<Integer>();
         bst.getPathSums(bst.root, pathSums, 0);
         for (Integer sum : pathSums) {
@@ -48,13 +53,14 @@ public class BinarySearchTreeTest {
         BinaryTree.TreeNode node5 = bst.insert(5,5);
         BinaryTree.TreeNode node9 = bst.insert(9,9);
 
-        int height = bst.getMaxDepth(bst.root);
-        boolean dir = true;
-        for (int i = 0; i < height; ++i){
-            bst.printLevel(bst.root, 0, i, dir);
-            System.out.println();
-            dir = !dir;
-        }
+        bst.printLevels();
+//        int height = bst.getMaxDepth(bst.root);
+//        boolean dir = true;
+//        for (int i = 0; i < height; ++i){
+//            bst.printLevel(bst.root, 0, i, dir);
+//            System.out.println();
+//            dir = !dir;
+//        }
 
         List<String> paths = new ArrayList<String>();
         bst.getPaths(bst.root, paths, "");

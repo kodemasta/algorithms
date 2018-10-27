@@ -392,7 +392,7 @@ public class SortArray {
     /////////////////////////////////////////////////////////////////////////////////
     // QUICKSORT
     //
-    // It can be about two or three times faster than its main competitors, merge sort and heapsort.
+    // It can be about two or three times faster than its main competitors, mergesort and heapsort.
     //
     // Quicksort is a comparison sort, meaning that it can sort items of any type for which a "less-than" relation (formally, a total order) is defined.
     // In efficient implementations it is not a stable sort, meaning that the relative order of equal sort items is not preserved.
@@ -404,7 +404,6 @@ public class SortArray {
     // Quicksort is a divide and conquer algorithm. Quicksort first divides a large array into two smaller sub-arrays: the low elements and the high elements. Quicksort can then recursively sort the sub-arrays.
 
     // The steps are:
-
     //      1 Pick an element, called a pivot, from the array.
     //      2 Reorder the array so that all elements with values less than the pivot come before the pivot,
     //          while all elements with values greater than the pivot come after it (equal values can go either way).

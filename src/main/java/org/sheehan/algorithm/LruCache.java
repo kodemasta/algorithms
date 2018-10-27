@@ -33,21 +33,29 @@ public class LruCache<K,V> {
     // either update or add to cache. handle lru update if at capacity
     public void put(K key, V val) {
 
-        //check and evict
+        // refresh or evict from fifo and cache
         if (cache.size() >= capacity){
-            K lruKey = (K) lruFifo.poll(); // removes from fifo
-            cache.remove(lruKey);
-            log.info("evicted "+ lruKey);
+            // if key then item is already in cache.. just refresh
+            if (lruFifo.contains(key)) {
+                lruFifo.remove(key);
+                log.info("REFRESHED LRU KEY "+ key); //add back in later
+
+            } else {
+                // remove from fifo cache
+                K lruKey = (K) lruFifo.poll(); // get oldest key from fifo and remove from fifo
+                cache.remove(lruKey); //remove from cache
+                log.info("EVICTED LRU KEY "+ lruKey);
+            }
         }
 
-        cache.put(key, val);
-
-        //update with new key
-        if (lruFifo.contains(key))
-            lruFifo.remove(key);
+        // update fifo
         lruFifo.add(key);
 
-        log.info ("PUT " + lruFifo.toString());
+        // update cache
+        cache.put(key, val);
+
+        log.info("PUT fifo" + lruFifo.toString());
+        log.info("PUT cache:" + cache.toString());
     }
 
     public V get(K key) {

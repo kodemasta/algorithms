@@ -7,6 +7,7 @@ public class GraphNode extends Node implements Comparable<GraphNode>  {
 
     public boolean visited;
     public int distance = 0; // bfs shortest path, and djikstra requires this
+    public GraphNode parent = null; // for tracking shortest path BFS
 
     public GraphNode()
     {

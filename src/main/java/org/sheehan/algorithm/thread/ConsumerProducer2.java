@@ -13,6 +13,7 @@ public class ConsumerProducer2 {
     final int MAX_MESSAGES = 10;
 
     // object that threads will synchronize on (see the get/enqueue methods)
+    // GUARDED BLOCKS. Blocking (waits) are gaurded by conditional while loop checks.
     public class Mailbox {
 
         Queue<String> messages = new LinkedList<String>();

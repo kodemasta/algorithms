@@ -2,6 +2,7 @@ package org.sheehan.algorithm.data_structures.tree;
 
 import org.junit.Test;
 
+import org.sheehan.algorithm.data_structures.Factory;
 import org.sheehan.algorithm.data_structures.array.Array;
 
 import java.util.ArrayList;
@@ -110,6 +111,35 @@ public class BinaryTreeTest {
 
         BinaryTree<Integer, Integer> tree = new BinaryTree<Integer, Integer>(null);
         tree.insertSortedArray(Array.create(Array.ArrayType.RANDOM_UNSORTED_UNIQUE, 20, 20));
+        tree.calculateNodeCounts(tree.root);
+
+        int height = tree.getMaxDepth(tree.root);
+        for (int i = 0; i < height; ++i) {
+            tree.printLevelSimple(tree.root, 0, i);
+            System.out.println();
+        }
+
+        BinaryTree.TreeNode<Integer, Integer> node1 = tree.getNode(tree.root, 1);
+        if (node1 != null)
+            System.out.println("Node 1: " + node1.toString());
+        BinaryTree.TreeNode<Integer, Integer> node6 = tree.getNode(tree.root, 6);
+        if (node6 != null)
+            System.out.println("Node 6: " + node6.toString());
+
+        BinaryTree.TreeNode<Integer, Integer> lca = tree.getLcaUsingParent(tree.root, tree.getNode(tree.root, 1), tree.getNode(tree.root, 6));
+        System.out.println("LCA for 1 and 6 is: " + lca.toString());
+
+        BinaryTree.TreeNode<Integer, Integer> lca2 = tree.getLcaWithoutParent(tree.root, tree.getNode(tree.root, 1), tree.getNode(tree.root, 6));
+        System.out.println("LCA for 1 and 6 is: " + lca2.toString());
+    }
+
+    @Test
+    public void testFromSortedList() throws Exception {
+
+        BinaryTree<Integer, Integer> tree = new BinaryTree<Integer, Integer>(null);
+        org.sheehan.algorithm.data_structures.List<Integer> list = Factory.create(Array.create(Array.ArrayType.RANDOM_UNSORTED_UNIQUE, 20, 20));
+        tree.insertSortedList(list);
+        tree.calculateNodeCounts(tree.root);
 
         int height = tree.getMaxDepth(tree.root);
         for (int i = 0; i < height; ++i) {
@@ -169,25 +199,5 @@ public class BinaryTreeTest {
 
     }
 
-    @Test
-    public void testInsertSortedArray() throws Exception {
-        BinaryTree tree = new BinaryTree();
 
-        Integer[] array = Array.create(Array.ArrayType.RANDOM_SORTED, 20, 100);
-        tree.insertSortedArray(array);
-
-        int height = tree.getMaxDepth(tree.root);
-        for (int i = 0; i < height; ++i) {
-            tree.printLevelSimple(tree.root, 0, i);
-            System.out.println();
-        }
-
-        System.out.println("LEVELS");
-        List<List<BinaryTree.TreeNode<Integer, Integer>>> levels = tree.getLevelNodes(x -> System.out.print(x + " "));
-        for (List<BinaryTree.TreeNode<Integer, Integer>> level : levels) {
-            for (BinaryTree.TreeNode<Integer, Integer> node : level)
-                System.out.print(node.key + " ");
-            System.out.println();
-        }
-    }
 }

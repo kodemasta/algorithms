@@ -15,31 +15,7 @@ public class BinarySearchTree<K extends Comparable<?super K>, V> extends BinaryT
         super(null);
     }
 
-    public TreeNode insertSortedList(List.Node<Integer> head) {
-        if(head==null)
-            return null;
 
-        this.root=insertSortedList(head,null);
-        return this.root;
-    }
-
-    public TreeNode insertSortedList(List.Node<Integer> head, List.Node<Integer> tail){
-        if (head==tail)
-            return null;
-
-        List.Node<Integer> slow = head;
-        List.Node<Integer> fast = head;
-        while(fast!=tail && fast.next!=tail){
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        TreeNode<Integer,Integer> node = new TreeNode<Integer,Integer>();
-        node.key=slow.data;
-        node.left = insertSortedList(head,slow);
-        node.right = insertSortedList(slow.next,tail);
-        return node;
-    }
 
     //iterative
     public int closestValueIterative(TreeNode<Integer,Integer> node, double target) {

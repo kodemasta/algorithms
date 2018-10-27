@@ -95,12 +95,57 @@ public class BinaryTree<K extends Comparable<? super K>, V> {
         TreeNode<K,V> node = new TreeNode<>();
         node.key = sortedArray[mid];
         node.left = insertSortedArray(sortedArray, l, mid);
-        if (node.left != null)
+        if (node.left != null) {
             node.left.parent = node;
+          //  node.count += node.left.count;
+        }
         node.right = insertSortedArray(sortedArray, mid+1, r);
-        if (node.right != null)
+        if (node.right != null) {
             node.right.parent = node;
+          //  node.count += node.right.count;
+        }
+
         return node;
+    }
+
+
+    public TreeNode insertSortedList(org.sheehan.algorithm.data_structures.List<Integer> list) {
+        if(list.size() == 0)
+            return null;
+
+        this.root = insertSortedList(list);
+        return this.root;
+    }
+
+    private TreeNode insertSortedList(org.sheehan.algorithm.data_structures.List.Node<Integer> listHead, org.sheehan.algorithm.data_structures.List.Node<Integer> listTail){
+        if (listHead==listTail)
+            return null;
+
+        // move to half way point (so we can create a balanced right and left)
+        org.sheehan.algorithm.data_structures.List.Node<Integer> halfwayListNode = listHead;
+        org.sheehan.algorithm.data_structures.List.Node<Integer> endListNode = listHead;
+        while(endListNode!=listTail && endListNode.next!=listTail){
+            halfwayListNode = halfwayListNode.next;
+            endListNode = endListNode.next.next;
+        }
+
+        // create tree node with recursive call for left and right
+        TreeNode<Integer,Integer> treeNode = new TreeNode<>();
+        treeNode.key = halfwayListNode.data;
+
+        TreeNode<Integer,Integer> treeNodeLeft = insertSortedList(listHead, halfwayListNode);
+        TreeNode<Integer,Integer> treeNodeRight = insertSortedList(halfwayListNode.next, listTail);
+
+        treeNode.left = treeNodeLeft;
+        treeNode.right = treeNodeRight;
+
+        if (treeNode.left != null)
+            treeNode.count += treeNode.left.count;
+        if (treeNode.right != null)
+            treeNode.count += treeNode.right.count;
+
+        // at end of recursion return top node of tree
+        return treeNode;
     }
 
     public int getDepth(TreeNode<K,V> root, K key, int level) {
@@ -110,6 +155,14 @@ public class BinaryTree<K extends Comparable<? super K>, V> {
             return level;
 
         return Math.max(getDepth(root.left, key, level+1), getDepth(root.right, key, level+1));
+    }
+
+    public int calculateNodeCounts(TreeNode<K,V> node) {
+        if(node == null)
+            return 0;
+        node.count += calculateNodeCounts(node.left);
+        node.count += calculateNodeCounts(node.right);
+        return node.count;
     }
 
     public int getMaxDepth(TreeNode<K,V> root) {
@@ -416,6 +469,7 @@ public class BinaryTree<K extends Comparable<? super K>, V> {
         node.key = key;
         node.left = left;
         node.right= right;
+        node.count = 0;
 
         if (left != null)
             left.parent = node;
@@ -432,6 +486,7 @@ public class BinaryTree<K extends Comparable<? super K>, V> {
         TreeNode <K,V> right;
 
         TreeNode <K,V> parent; // for successorWithParent BST traversal
+        int count = 1;
 
         boolean color;     // RB TREE color of parent link
         //int N;             // RB TREE subtree count
@@ -441,11 +496,13 @@ public class BinaryTree<K extends Comparable<? super K>, V> {
         public String toString(){
             StringBuilder sb = new StringBuilder();
             if (key!=null)
-                sb.append("key:" + key.toString());
+                sb.append("[ key:" + key.toString());
             if (value!=null)
                 sb.append(" value:" + value.toString());
 
             sb.append(" color:" + color);
+            sb.append(" count:" + count);
+            sb.append(" ] ");
 
             return sb.toString();
         }
@@ -473,6 +530,14 @@ public class BinaryTree<K extends Comparable<? super K>, V> {
         System.out.print(node.toString());
         print(node.right, level + 1, "right");
         System.out.print(")");
+    }
+
+    public void printLevels() {
+        int height = this.getMaxDepth(this.root);
+        for (int i = 0; i < height; ++i) {
+            this.printLevel(this.root, 0, i, true);
+            System.out.println();
+        }
     }
 
     // print level with either right to left or left to right direction
@@ -503,10 +568,11 @@ public class BinaryTree<K extends Comparable<? super K>, V> {
             return;
         }
         if (level == rLevel) {
-            if (node.parent != null)
-                System.out.print(node.key + " (" + node.parent.key  + ") " /*+ node.color + " "*/);
-            else
-                System.out.print(node.key /*+ " null " + node.color + " "*/);
+//            if (node.parent != null)
+//                System.out.print(node.key + " (" + node.parent.key  + ") " /*+ node.color + " "*/);
+//            else
+//                System.out.print(node.key /*+ " null " + node.color + " "*/);
+            System.out.print(node.toString());
         }
 
         printLevelSimple(node.left, level + 1, rLevel);

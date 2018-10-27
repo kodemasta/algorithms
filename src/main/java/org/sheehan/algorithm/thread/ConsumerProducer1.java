@@ -1,36 +1,50 @@
 package org.sheehan.algorithm.thread;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * Created by bob on 6/27/14.
  */
 public class ConsumerProducer1 {
 
-    Object product;
+    Object sharedResource = null;
+    ReentrantLock lock = new ReentrantLock();
 
     public class Producer implements Runnable{
 
         @Override
         public void run() {
             while (true) { // produce until interrupted !!
-                synchronized (ConsumerProducer1.this) { //acquire the implicit lock
-                    System.out.println("producer acquires lock");
-                    product = new Object(); //produce product
-                    System.out.println("\tPRODUCE:" + product.toString());
-                    System.out.println();
-                    ConsumerProducer1.this.notify();
-                    System.out.println("\t\tproducer releases lock - notified");
+
+                // this is critical section.. wait for lock here
+                System.out.println("<producer thread waits for lock");
+                synchronized (lock) { //acquire the implicit lock
+                    System.out.println("\t<producer thread acquires lock");
+                    if (sharedResource == null) {
+                        sharedResource = new Object(); //produce sharedResource
+                        System.out.println("\t<***PRODUCE SHARED RESOURCE:" + sharedResource.toString());
+                    }
+
+                    lock.notify();
+                    System.out.println("\t\t<lock notifies consumer thread");
+
                 } //release the intrinsic lock for other notified threads to acquire
 
+//                Thread.yield(); // not recommended
+
+                // use this to control rate of production
                 try {
-                    System.out.println("producer sleeps");
-                    Thread.sleep(500);
-                    System.out.println("producer wakes up !");
+                    System.out.println("\t\t<producer sleeps");
+                    System.out.println();
+                    System.out.println();
+                    Thread.sleep(1000);
+                    System.out.println("\t\t<producer wakes up !");
                 } catch (InterruptedException e) {
-                    System.out.println("producer interrupted during sleep");
+                    System.out.println("<producer interrupted during sleep");
                     return; // sleep interrupted return
                 }
                 if (Thread.interrupted()) {
-                    System.out.println("producer interrupted during run");
+                    System.out.println("<producer interrupted during run");
                     return; // thread was running but interrupt flag enqueue so return
                 }
             }
@@ -42,24 +56,27 @@ public class ConsumerProducer1 {
 
         @Override
         public void run() {
-            while(product == null) { //keep checking for new products
-                synchronized (ConsumerProducer1.this) { //acquire the implicit lock
-                    System.out.println("consumer acquires lock");
+            while(true) { //keep checking for new products
+                System.out.println(">consumer waits for lock");
+                synchronized (lock) { //acquire the implicit lock
+                    System.out.println("\t>consumer acquires lock");
                     try {
-                        System.out.println("\t\tconsumer releases lock - waiting");
-                        ConsumerProducer1.this.wait();
-                        System.out.println("consumer acquires lock - woke up !");
-                        System.out.println("\tCONSUME:" + product.toString());
-                        System.out.println();
-                        product = null; //consume product
+                        if (sharedResource == null) {
+                            System.out.println("\t\t>lock releases consumer hold - waiting");
+                            lock.wait();
+                        } else {
+                            System.out.println(">consumer acquires lock - woke up !");
+                            System.out.println("\t>***CONSUME SHARED RESOURCE:" + sharedResource.toString());
+                            sharedResource = null; //consume sharedResource
+                            System.out.println("\t\t>consumer releases lock - end of block scope");
+                        }
                     } catch (InterruptedException e) {
-                        System.out.println("consumer interrupted during wait");
+                        System.out.println(">consumer interrupted during wait");
                         return; // sleep interrupted return
                     }
-                    System.out.println("\t\tconsumer releases lock");
                 } //release the intrinsic lock for other notified threads to acquire
                 if (Thread.interrupted()) {
-                    System.out.println("consumer interrupted during run");
+                    System.out.println(">consumer interrupted during run");
                     return; // thread was running but interrupt flag enqueue so return
                 }
             }
@@ -75,7 +92,7 @@ public class ConsumerProducer1 {
         consume.start();
         produce.start();
 
-        Thread.sleep(5000);
+        Thread.sleep(2000); // terminate after 5 secs.. otherwise does not end !
 
         consume.interrupt();
         produce.interrupt();

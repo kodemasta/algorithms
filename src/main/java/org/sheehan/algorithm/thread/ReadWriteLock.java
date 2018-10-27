@@ -6,15 +6,21 @@ package org.sheehan.algorithm.thread;
 public class ReadWriteLock {
     int numReaders = 0;
     int numWriters = 0;
-    int numWriterRequesters = 0;
+    int numWriterRequesters = 0; // prioritizes writers in wait before new reads
 
+    // no reading allowed if writers are on the scene
+    // but welcome to have many readers if that all there is !
     synchronized void acquireReadLock() throws InterruptedException {
         while (numWriters > 0 || numWriterRequesters > 0) {
             System.out.println(Thread.currentThread().getName() + " read lock wait");
             wait();
         }
-        System.out.println(Thread.currentThread().getName() + " has lock");
         numReaders++;
+        this.print();
+    }
+
+    public void print() {
+        System.out.println("ReadWriteLock - " + Thread.currentThread().getName() + " readers:" + numReaders + " writers:" + numWriters + " writeRequestors:" + numWriterRequesters);
 
     }
 
@@ -24,9 +30,9 @@ public class ReadWriteLock {
             System.out.println(Thread.currentThread().getName() + " write lock wait");
             wait();
         }
-        System.out.println(Thread.currentThread().getName() + " has lock");
         numWriterRequesters--;
         numWriters++;
+        this.print();
 
     }
 
@@ -35,6 +41,7 @@ public class ReadWriteLock {
         System.out.println(Thread.currentThread().getName() + " read lock release");
         --numReaders;
         notifyAll();
+        this.print();
 
     }
 
@@ -42,18 +49,17 @@ public class ReadWriteLock {
         System.out.println(Thread.currentThread().getName() + " write lock release");
         --numWriters;
         notifyAll();
+        this.print();
 
     }
 
-    public static void main(String []args) {
+    public static void main(String []args) throws InterruptedException {
         ReadWriteLock lock = new ReadWriteLock();
 
-        Thread r1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
+        Thread r1 = new Thread(() -> {
                 try {
                     lock.acquireReadLock();
-                    System.out.println("--read 1 reading");
+                    System.out.println(Thread.currentThread().getName() + " READING");
                     Thread.sleep(100);
                     lock.releaseReadLock();
 
@@ -61,16 +67,14 @@ public class ReadWriteLock {
                     e.printStackTrace();
                 }
             }
-        });
-
-        r1.setName("reader 1");
+        , "Reader Thread 1");
 
         Thread r2 = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     lock.acquireReadLock();
-                    System.out.println("--read 2 reading");
+                    System.out.println(Thread.currentThread().getName() + " READING");
                     Thread.sleep(200);
                     lock.releaseReadLock();
 
@@ -78,16 +82,15 @@ public class ReadWriteLock {
                     e.printStackTrace();
                 }
             }
-        });
+        }, "Reader Thread 2");
 
-        r2.setName("reader 2");
 
         Thread w1 = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     lock.acquireWriteLock();
-                    System.out.println("--write 1 writing");
+                    System.out.println(Thread.currentThread().getName() + " WRITING");
                     Thread.sleep(10);
                     lock.releaseWriteLock();
 
@@ -95,16 +98,15 @@ public class ReadWriteLock {
                     e.printStackTrace();
                 }
             }
-        });
+        }, "Writer Thread 3");
 
-        w1.setName("writer 1");
 
         Thread w2 = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     lock.acquireWriteLock();
-                    System.out.println("--write 2 writing");
+                    System.out.println(Thread.currentThread().getName() + " WRITING");
                     Thread.sleep(10);
                     lock.releaseWriteLock();
 
@@ -112,13 +114,14 @@ public class ReadWriteLock {
                     e.printStackTrace();
                 }
             }
-        });
-        w2.setName("writer 2");
+        },"Writer Thread 4");
 
         w1.start();
         w2.start();
         r1.start();
         r2.start();
+
+        Thread.sleep(5000);
 
 
     }

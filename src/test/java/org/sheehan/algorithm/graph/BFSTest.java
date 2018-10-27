@@ -18,5 +18,7 @@ public class BFSTest {
         System.out.println("source:" +graph.getNodes().iterator().next());
         bfs.visitIterative(graph.getNodes().iterator().next());
         bfs.printConnected();
+
+        bfs.printAllPaths();
     }
 }

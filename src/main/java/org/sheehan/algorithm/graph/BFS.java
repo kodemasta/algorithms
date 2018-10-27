@@ -5,6 +5,8 @@ import org.sheehan.algorithm.data_structures.graph.Graph;
 import org.sheehan.algorithm.data_structures.graph.GraphNode;
 import org.sheehan.algorithm.data_structures.queue.QueueArrayImpl;
 import org.sheehan.algorithm.data_structures.queue.QueueInterface;
+import org.sheehan.algorithm.data_structures.stack.Stack;
+import org.sheehan.algorithm.data_structures.stack.StackArrayImpl;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,6 +37,7 @@ public class BFS {
                     queue.enqueue(neighbor);
                     neighbor.visited = true; // mark after adding to queue
                     neighbor.distance = node.distance+1;
+                    neighbor.parent = node;
                 }
             }
         }
@@ -69,6 +72,29 @@ public class BFS {
                 visitedNodes.add(node);
         }
         return visitedNodes;
+    }
+
+    public void printAllPaths() {
+        for (GraphNode destNode: graph.getNodes()) {
+             GraphNode node = destNode;
+            if (node.visited) {
+                Stack<Integer> path = new StackArrayImpl<>(100);
+                path.push(node.id);
+                while( node != null && node.parent != null){
+                    path.push(node.parent.id);
+                    node=node.parent;
+                }
+                System.out.print("path to :" + destNode.id + " - ");
+                while(path.peek() != null){
+                    System.out.print(path.pop() + " ");
+                }
+                System.out.println();
+
+            }
+        }
+
+
+
     }
 
 

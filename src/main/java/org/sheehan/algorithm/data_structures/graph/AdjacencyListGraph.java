@@ -97,15 +97,15 @@ public class AdjacencyListGraph implements Graph {
     @Override
     public GraphEdge  addDirectedEdge( GraphNode node1,  GraphNode node2, int weight) {
         if (!graphNodes.contains(node1)) {
-            System.err.println("no node added for: " + node1);
+            //System.err.println("no node added for: " + node1);
             return null;
         }
         if (!graphNodes.contains(node2)) {
-            System.err.println("no node added for: " + node2);
+            //System.err.println("no node added for: " + node2);
             return null;
         }
         if (isEdge(node1, node2)) {
-            System.err.println("already edge for:" + node1 + " " + node2);
+            //System.err.println("already edge for:" + node1 + " " + node2);
             return null;
         }
         GraphEdge edge1 = new GraphEdge(node1, node2, weight);

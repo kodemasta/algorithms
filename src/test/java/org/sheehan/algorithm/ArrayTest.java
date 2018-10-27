@@ -104,8 +104,8 @@ public class ArrayTest {
 
     @Test
     public void testKnuthShuffle() {
-        Integer array1[] = Array.create(Array.ArrayType.RANDOM_SORTED, 10, 100);
-         Array.print(array1);
+        Integer array1[] = Array.create(Array.ArrayType.RANDOM_SORTED_UNIQUE, 100, 100);
+        Array.print(array1);
         Array.shuffle(array1);
     }
 
