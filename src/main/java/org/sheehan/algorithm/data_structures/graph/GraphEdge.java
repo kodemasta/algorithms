@@ -7,7 +7,7 @@ public class GraphEdge implements Comparable<GraphEdge> {
     public GraphNode dstNode;
     public GraphNode srcNode; //optional - not needed for adjacency list impl below
     public Integer weight = 1;
-    public boolean visited; // used for topo sort
+    public boolean visited; // used for topo sortBucket
 
     public GraphEdge(GraphNode node1, GraphNode node2, Integer weight)
     {

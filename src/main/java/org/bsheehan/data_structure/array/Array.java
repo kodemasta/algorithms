@@ -7,7 +7,6 @@ import java.util.*;
 
 public class Array {
 
-
     public enum ArrayType {
         RANDOM_UNSORTED,
         RANDOM_SORTED,
@@ -18,30 +17,35 @@ public class Array {
     }
 
     public static int[] create(Array.ArrayType type, int bound, int size){
+        return create(type, 0, bound, size);
+    }
+
+
+    public static int[] create(Array.ArrayType type, int start, int bound, int size){
         int arr[] = new int[size];
 
         switch (type) {
             case RANDOM_UNSORTED:
                 Random rand = new Random();
                 for (int i=0; i < size; ++i){
-                    arr[i] = rand.nextInt(bound);
+                    arr[i] = start + rand.nextInt(bound-start);
                 }
                 break;
             case RANDOM_SORTED:
                 rand = new Random();
                 for (int i=0; i < size; ++i){
-                    arr[i] = rand.nextInt(bound);
+                    arr[i] =  start + rand.nextInt(bound-start);
                 }
                 Arrays.parallelSort(arr);
                 break;
             case LINEAR_SORTED:
                 for (int i=0; i < size; ++i){
-                    arr[i] = i;
+                    arr[i] = i + start;
                 }
                 break;
             case LINEAR_UNSORTED:
                 for (int i=0; i < size; ++i){
-                    arr[i] = i;
+                    arr[i] = i + start;
                 }
                 Shuffle.shuffle(arr);
                 break;
@@ -51,7 +55,7 @@ public class Array {
                     throw new RuntimeException("bound < size for RANDOM_UNSORTED_UNIQUE");
                 rand = new Random();
                 while(unique.size() < size)
-                    unique.add(rand.nextInt(bound));
+                    unique.add( start + rand.nextInt(bound-start));
                 int i = 0;
                 for (int val: unique){
                     arr[i++]=val;
@@ -63,7 +67,7 @@ public class Array {
                     throw new RuntimeException("bound < size for RANDOM_UNSORTED_UNIQUE");
                 rand = new Random();
                 while(unique.size() < size)
-                    unique.add(rand.nextInt(bound));
+                    unique.add( start + rand.nextInt(bound-start));
                 MergeSort.sort(arr);
                 break;
         }

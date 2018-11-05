@@ -5,6 +5,8 @@ import org.bsheehan.data_structure.array.Array;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class QuicksortTest extends BaseTest{
     @Test
     public void test() {
@@ -14,5 +16,19 @@ public class QuicksortTest extends BaseTest{
         Quicksort.sort(a);
         Array.print(a);
         Assert.assertTrue("Sorted", Array.isSorted(a, true));
+    }
+
+    @Test
+    public void testSelect() {
+        super.test();
+        int[] a = Array.create(Array.ArrayType.RANDOM_UNSORTED_UNIQUE, 100, 10);
+        int[] aCopy = Arrays.copyOf(a, a.length);
+        Quicksort.sort(aCopy);
+        Array.print(aCopy);
+
+        int k = 5;
+        int kVal = Quicksort.select(a,k);
+        System.out.println("K Select Value:" + kVal);
+        Assert.assertEquals("Kth Matches", aCopy[k], kVal);
     }
 }

@@ -175,7 +175,6 @@ public class StringsTest {
         test = "ABABCDEFGHGH";
         s = Strings.removeDuplicatesSet(test);
         System.out.println(s);
-
     }
 
     @Test
@@ -186,7 +185,6 @@ public class StringsTest {
         String s = Strings.removeCharsSet(str,remove);
         System.out.println(s);
     }
-
 
     @Test
     public void testFindSubstring(){

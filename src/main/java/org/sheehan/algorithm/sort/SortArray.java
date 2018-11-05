@@ -394,14 +394,14 @@ public class SortArray {
     //
     // It can be about two or three times faster than its main competitors, mergesort and heapsort.
     //
-    // Quicksort is a comparison sort, meaning that it can sort items of any type for which a "less-than" relation (formally, a total order) is defined.
-    // In efficient implementations it is not a stable sort, meaning that the relative order of equal sort items is not preserved.
+    // Quicksort is a comparison sortBucket, meaning that it can sortBucket items of any type for which a "less-than" relation (formally, a total order) is defined.
+    // In efficient implementations it is not a stable sortBucket, meaning that the relative order of equal sortBucket items is not preserved.
     // Quicksort can operate in-place on an array, requiring small additional amounts of memory to perform the sorting.
     //
-    // Mathematical analysis of quicksort shows that, on average, the algorithm takes O(n log n) comparisons to sort n items.
+    // Mathematical analysis of quicksort shows that, on average, the algorithm takes O(n log n) comparisons to sortBucket n items.
     // In the worst case, it makes O(n2) comparisons, though this behavior is rare.
     //
-    // Quicksort is a divide and conquer algorithm. Quicksort first divides a large array into two smaller sub-arrays: the low elements and the high elements. Quicksort can then recursively sort the sub-arrays.
+    // Quicksort is a divide and conquer algorithm. Quicksort first divides a large array into two smaller sub-arrays: the low elements and the high elements. Quicksort can then recursively sortBucket the sub-arrays.
 
     // The steps are:
     //      1 Pick an element, called a pivot, from the array.
@@ -461,10 +461,11 @@ public class SortArray {
         /** else it might give out of memory exception while allocating memory for array **/
         if (range > MAX_RANGE)
         {
-            System.out.println("\nError : Range too large for sort");
+            System.out.println("\nError : Range too large for sortBucket");
             return;
 
         }
+
         Integer counts[] = new Integer[range];
         Integer output[] = new Integer[array.length];
 
@@ -502,28 +503,27 @@ public class SortArray {
     // LSD on integer keys
     // BASE = 10
     /////////////////////////////////////////////////////////////////////////////////
-    public static void radixSort(Integer array[]) {
+    public static void radixSort(Integer arr[]) {
         final int BASE = 10;
         int numBuckets = BASE;
 
         List<QueueInterface<Integer>> buckets = new ListImpl<QueueInterface<Integer>>();
         for (int i = 0; i < numBuckets; i++){
-            buckets.appendBack(new QueueArrayImpl<Integer>(array.length));
+            buckets.appendBack(new QueueArrayImpl<Integer>(arr.length));
         }
 
-        Integer max = Integer.MIN_VALUE;
-        for (Integer value: array)
-            max = Math.max(value,max);
+        Integer maxVal = Integer.MIN_VALUE;
+        for (Integer value: arr)
+            maxVal = Math.max(value,maxVal);
 
 
         // while there is a max element larger positional value, iterate another bucket sorting pass
         // moving the position from right to left by one
-        for (int positionMultiplier=1; max >= positionMultiplier; positionMultiplier *= BASE) {
+        for (int posMult=1; maxVal >= posMult; posMult *= BASE) {
             // each pass checks a rt to left position and buckets based on that digit
-            for (Integer value : array){
-                int valueDiv = value/positionMultiplier;
-                int valueMod = valueDiv%BASE;
-                buckets.get(valueMod).enqueue(value);
+            for (Integer value : arr){
+                int bucketIndex = (value/posMult)%BASE;
+                buckets.get(bucketIndex).enqueue(value);
             }
 
             // reset array to new order after sorting this pass
@@ -534,7 +534,7 @@ public class SortArray {
                 QueueInterface<Integer> bucket = buckets.get(bucketIndex);
                 Integer value;
                 while ((value = bucket.dequeue()) != null){
-                    array[i++] = value;
+                    arr[i++] = value;
                 }
             }
         }

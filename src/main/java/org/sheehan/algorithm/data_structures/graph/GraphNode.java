@@ -36,6 +36,6 @@ public class GraphNode extends Node implements Comparable<GraphNode>  {
 
     @Override
     public String toString(){
-        return "(Node:" + id + " distance:" + distance + " visited:" + visited +")";
+        return "(HashNode:" + id + " distance:" + distance + " visited:" + visited +")";
     }
 }

@@ -5,7 +5,7 @@ package org.bsheehan.data_structure.array.algorithms.sort;
 // In case of linked lists the case is different mainly due to difference in memory allocation of arrays and linked lists.
 // External sorting is a class of sorting algorithms that can handle massive amounts of data.
 // External sorting is required when the data being sorted do not fit into the main memory of a computing device (usually RAM) and instead they must reside in the slower external memory, usually a hard disk drive.
-// Step 1. divide total data into K chunks that fit into main memory and sort with quicksort into K sorted files on disk
+// Step 1. divide total data into K chunks that fit into main memory and sortBucket with quicksort into K sorted files on disk
 // step 2. divide main memory into K input buffers and 1 output buffer
 // step 3. perform K-Way merge into output buffer
 

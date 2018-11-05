@@ -465,7 +465,7 @@ public class Strings {
     }
 
     public static boolean isAnagram(String str1, String str2){
-        //TODO - could just sort and compare !
+        //TODO - could just sortBucket and compare !
         // remove all white spaces
         //check length (odd or even)
         // build map of char 1 letter count
@@ -479,7 +479,7 @@ public class Strings {
     // RADIX SORT
     // LSD on fixed length lexical keys
     // bucket is queue for each ascii char
-    // sort iteratively by single character moving left
+    // sortBucket iteratively by single character moving left
     /////////////////////////////////////////////////////////////////////////////////
     public static void radixSortLexicalFixedLsd(String words[]) {
         // 256 ASCII character positions
@@ -520,7 +520,7 @@ public class Strings {
 
     // 1. bucket the strings by length (maxlen buckets)
     // 2. reset the input array to be sorted by length using the buckets
-    // 3. left to right radix sort into 256 (ASCII) alpha buckets.
+    // 3. left to right radix sortBucket into 256 (ASCII) alpha buckets.
     // 3a. start on left most position on longest strings,
     // 3b. then as the position is moved to the right include additional bucket of that smaller
     //     length.
@@ -535,7 +535,7 @@ public class Strings {
             lengthBuckets.add(new ArrayList<String>());
 
 
-        // execute buckets for each length and sort the strings by length into each bucket.
+        // execute buckets for each length and sortBucket the strings by length into each bucket.
         for (String s : words)
             lengthBuckets.get(s.length()).add(s);
 

@@ -209,7 +209,7 @@ public class TestSnakesAndLadders {
 
         @Override
         public String toString(){
-            return "(Node:" + payload + " " + visited +")";
+            return "(HashNode:" + payload + " " + visited +")";
         }
     }
 
@@ -218,7 +218,7 @@ public class TestSnakesAndLadders {
         public GraphNode<T> dstNode;
         public GraphNode<T> srcNode; //optional - not needed for adjacency list impl below
         public Integer weight = 1;
-        public boolean visited; // used for topo sort
+        public boolean visited; // used for topo sortBucket
 
         public GraphEdge(GraphNode<T> node1, GraphNode<T> node2, Integer weight)
         {

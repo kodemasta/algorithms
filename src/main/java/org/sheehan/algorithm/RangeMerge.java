@@ -88,7 +88,7 @@ public class RangeMerge {
         listRanges.addAll(ranges);
         Collections.sort(listRanges);
 
-        // first sort ranges by starting point
+        // first sortBucket ranges by starting point
         Iterator<Range> iterator = listRanges.iterator();
         Range curr = iterator.next();
         while(iterator.hasNext()){

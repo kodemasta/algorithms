@@ -13,8 +13,8 @@ public class GraphMatrix <T extends Comparable<T>> implements Graph<T> {
 
     public GraphMatrix(T []nodes) {
         this.nodes = nodes;
-        //sort so we can look up index with binary search
-        Arrays.sort(this.nodes);
+        //sortBucket so we can look up index with binary search
+        Arrays.sortBucket(this.nodes);
         graph = new int[nodes.length][nodes.length];
         for (int i = 0; i < this.nodes.length; ++i) {
             for (int j = 0; j < this.nodes.length; ++j) {

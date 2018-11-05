@@ -317,13 +317,13 @@ public class ListImpl <T extends Comparable<T>> implements List<T> {
 //    }
 //
 //    //TODO NEEDS MORE INVESTIGATION !!!!!!!!!!!!!!!!!!!!!
-//    public Node reverseRecurse(Node node) {
+//    public HashNode reverseRecurse(HashNode node) {
 //        if (node == null) return null;
 //        if (node.next == null) return node;
 //
-//        Node secondElem = node.next;
+//        HashNode secondElem = node.next;
 //        node.next = null;
-//        Node reverseRest = reverseRecurse(secondElem);
+//        HashNode reverseRest = reverseRecurse(secondElem);
 //        secondElem.next = node;
 //        return reverseRest;
 //    }
@@ -354,7 +354,7 @@ public class ListImpl <T extends Comparable<T>> implements List<T> {
     public void introduceCycleForTest() {
 
 //        // get to tail so tail can point to some random node
-//        Node tail = this.head;
+//        HashNode tail = this.head;
 //        while (tail.next != null) {
 //            tail = tail.next;
 //        }

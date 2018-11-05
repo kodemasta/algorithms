@@ -1,4 +1,6 @@
-package org.sheehan.algorithm.data_structures.array;
+package org.bsheehan.data_structure.matrix;
+
+import org.sheehan.algorithm.data_structures.array.Array;
 
 public class Matrix {
 
@@ -26,6 +28,17 @@ public class Matrix {
             }
         }
         System.out.println();
+    }
+
+
+    public static void print(Integer array[][]){
+        for (int i = 0; i<array.length; ++i){
+            for (int j = 0; j<array[i].length; ++j){
+                System.out.print(String.format("%2d ", array[i][j]));
+            }
+            System.out.println();
+        }
+
     }
 
 }

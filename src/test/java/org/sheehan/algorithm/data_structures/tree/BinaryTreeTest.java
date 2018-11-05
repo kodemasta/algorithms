@@ -121,10 +121,10 @@ public class BinaryTreeTest {
 
         BinaryTree.TreeNode<Integer, Integer> node1 = tree.getNode(tree.root, 1);
         if (node1 != null)
-            System.out.println("Node 1: " + node1.toString());
+            System.out.println("HashNode 1: " + node1.toString());
         BinaryTree.TreeNode<Integer, Integer> node6 = tree.getNode(tree.root, 6);
         if (node6 != null)
-            System.out.println("Node 6: " + node6.toString());
+            System.out.println("HashNode 6: " + node6.toString());
 
         BinaryTree.TreeNode<Integer, Integer> lca = tree.getLcaUsingParent(tree.root, tree.getNode(tree.root, 1), tree.getNode(tree.root, 6));
         System.out.println("LCA for 1 and 6 is: " + lca.toString());
@@ -149,10 +149,10 @@ public class BinaryTreeTest {
 
         BinaryTree.TreeNode<Integer, Integer> node1 = tree.getNode(tree.root, 1);
         if (node1 != null)
-            System.out.println("Node 1: " + node1.toString());
+            System.out.println("HashNode 1: " + node1.toString());
         BinaryTree.TreeNode<Integer, Integer> node6 = tree.getNode(tree.root, 6);
         if (node6 != null)
-            System.out.println("Node 6: " + node6.toString());
+            System.out.println("HashNode 6: " + node6.toString());
 
         BinaryTree.TreeNode<Integer, Integer> lca = tree.getLcaUsingParent(tree.root, tree.getNode(tree.root, 1), tree.getNode(tree.root, 6));
         System.out.println("LCA for 1 and 6 is: " + lca.toString());
