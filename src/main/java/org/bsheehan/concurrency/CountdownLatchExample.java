@@ -27,9 +27,10 @@ public class CountdownLatchExample {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println(this.name + " completed run " + latch.getCount());
+            System.out.println(this.name + " completed run - countdown ");
+
+            // Decrements the count of the latch, releasing all waiting threads if the count reaches zero.
             latch.countDown();
-            //System.out.println(this.name + " after latch countdown " + latch.getCount());
         }
     }
 
@@ -43,7 +44,7 @@ public class CountdownLatchExample {
         }
 
         latch.await();
-        System.out.println("OK ALL UP AND RUNNING");
+        System.out.println("OK ALL 5 UP AND RUNNING - Latch Open");
 
         executor.shutdown();
         try {
