@@ -98,7 +98,7 @@ public class QueueImplTest {
         int size = 10;
         QueueInterface q = new QueueArrayImpl<Integer>(size);
 
-        // fill queue
+        // fill stack
         for (int i = 0; i < size; ++i){
             q.enqueue(i);
             q.print();
@@ -110,7 +110,7 @@ public class QueueImplTest {
             q.print();
         }
 
-        // enqueue 5 more queue
+        // enqueue 5 more stack
         for (int i =  size/2; i < size; ++i){
             q.enqueue(i * 10);
             q.print();

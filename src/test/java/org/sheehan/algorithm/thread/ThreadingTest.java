@@ -1,8 +1,9 @@
 package org.sheehan.algorithm.thread;
 
 import junit.framework.TestCase;
+import org.bsheehan.concurrency.ReadWriteLock;
 
-    public class ThreadingTest extends TestCase {
+public class ThreadingTest extends TestCase {
 
 
         public void test1() throws Exception {

@@ -38,7 +38,7 @@ public class QueueArrayImpl<T extends Comparable<T>> implements QueueInterface<T
         count--;
         firstIndex %=size;
 
-        //TODO resize for smaller queue memory
+        //TODO resize for smaller stack memory
         return value;
     }
 

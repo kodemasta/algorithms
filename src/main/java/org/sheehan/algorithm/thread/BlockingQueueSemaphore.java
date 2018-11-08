@@ -48,7 +48,7 @@ public class BlockingQueueSemaphore<T extends Comparable<T>> {
     public int remove() throws InterruptedException {
 //        try {
 //
-//            T val = queue.remove();
+//            T val = stack.remove();
 //
 //            System.out.println("removed " + val);
 //            //printQueue();

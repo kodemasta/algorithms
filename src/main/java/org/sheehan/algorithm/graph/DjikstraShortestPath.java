@@ -88,7 +88,7 @@ public class DjikstraShortestPath {
         }
     }
 
-    // to print the path push onto LIFO stack then pop and print
+    // to print the path push onto LIFO queue then pop and print
     public void printPath(GraphNode srcNode, GraphNode dstNode) {
         Stack<GraphNode> path = new StackArrayImpl<>(predecessorMap.size());
         path.push(dstNode);

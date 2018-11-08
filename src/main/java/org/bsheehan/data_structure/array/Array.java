@@ -80,6 +80,10 @@ public class Array {
         array[j]=temp;
     }
 
+    public static void print(Integer  arr[]){
+        print(arr);
+    }
+
     public static void print(int arr[]){
         System.out.print("{ ");
         Arrays.stream(arr).forEach((val)->System.out.print(val + " "));

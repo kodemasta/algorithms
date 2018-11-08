@@ -13,7 +13,7 @@ import java.util.Set;
 
 /**
  * Created by bob on 7/8/14.
- * BFS - uses queue - mark after enqueue
+ * BFS - uses stack - mark after enqueue
  */
 public class BFS {
 
@@ -23,19 +23,19 @@ public class BFS {
         this.graph = graph;
     }
 
-    // use a queue for BFS - NO RECURSIVE FOR BSF
+    // use a stack for BFS - NO RECURSIVE FOR BSF
     public void visitIterative(GraphNode sourceNode){
         clearVisited();
         QueueInterface<GraphNode> queue = new QueueArrayImpl<>(100);
         queue.enqueue(sourceNode);
-        sourceNode.visited = true; // mark after adding to queue
+        sourceNode.visited = true; // mark after adding to stack
         while (queue.peek() != null) {
             GraphNode node = queue.dequeue();
             List<GraphNode> neighbors = graph.getNeighbors(node);
             for (GraphNode neighbor: neighbors){
                 if (!neighbor.visited) {
                     queue.enqueue(neighbor);
-                    neighbor.visited = true; // mark after adding to queue
+                    neighbor.visited = true; // mark after adding to stack
                     neighbor.distance = node.distance+1;
                     neighbor.parent = node;
                 }

@@ -96,8 +96,8 @@ public class BlockingQueueTest extends TestCase {
         executor.awaitTermination(1, TimeUnit.DAYS);
     }
 
-    // only a certain number of permits are available to to add to queue.
-    // if number of permits exceeded then queue skips the add
+    // only a certain number of permits are available to to add to stack.
+    // if number of permits exceeded then stack skips the add
     public void testSemaphore() throws Exception {
 
         int CAPACITY=2;
@@ -132,7 +132,7 @@ public class BlockingQueueTest extends TestCase {
 //                    try {
 //                        System.out.println("running remove thread: " + Thread.currentThread().getName());
 //                        Thread.sleep(500);
-//                        queue.remove();
+//                        stack.remove();
 //                    } catch (InterruptedException e) {
 //                        e.printStackTrace();
 //                    }

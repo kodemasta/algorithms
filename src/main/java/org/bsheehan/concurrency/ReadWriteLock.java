@@ -1,4 +1,4 @@
-package org.sheehan.algorithm.thread;
+package org.bsheehan.concurrency;
 
 /**
  * Created by bsheehan on 3/1/16.

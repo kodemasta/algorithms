@@ -107,7 +107,7 @@ public class Recursion {
         }
 
         //recursive start with row 0
-        public void placeQueen(int row){
+        public void placeQueen(final int row){
             if (row == 8){
                 printBoard();
                 return;
@@ -118,6 +118,9 @@ public class Recursion {
                 queenColForRow[row] = col; //candidate.. there may be several that succeed here !
                 if (checkRow(row))
                     placeQueen(row+1); //next row recurse
+                else{
+                    // BACKTRACK - bad row placement
+                }
             }
         }
     }

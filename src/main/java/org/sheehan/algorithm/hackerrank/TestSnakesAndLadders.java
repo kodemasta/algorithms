@@ -53,12 +53,12 @@ public class TestSnakesAndLadders {
     /**
      * Created by bob on 7/13/14.
      *
-     * A Heap is a specific data structure or implementation of an efficient priority queue, which is simply a type that allows
+     * A Heap is a specific data structure or implementation of an efficient priority stack, which is simply a type that allows
      * retrieval of elements by priority (min or max).
      *
      * This allows for specification of min or max. As a complete tree we use a fixed size array for heap implementation.
      *
-     * implements a dequeue method which provides priority queue functionality
+     * implements a dequeue method which provides priority stack functionality
      */
     public enum HeapType {MIN_HEAP, MAX_HEAP};
     public class BinaryHeap <T extends Comparable<T>> extends BinaryCompleteTree<T> {

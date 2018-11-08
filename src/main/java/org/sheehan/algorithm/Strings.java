@@ -478,7 +478,7 @@ public class Strings {
     /////////////////////////////////////////////////////////////////////////////////
     // RADIX SORT
     // LSD on fixed length lexical keys
-    // bucket is queue for each ascii char
+    // bucket is stack for each ascii char
     // sortBucket iteratively by single character moving left
     /////////////////////////////////////////////////////////////////////////////////
     public static void radixSortLexicalFixedLsd(String words[]) {

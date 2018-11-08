@@ -1,15 +1,17 @@
 package org.bsheehan.data_structure.string.algorithm;
 
+import org.bsheehan.BaseTest;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class RadixSortTest {
+public class RadixSortTest extends BaseTest{
 
     @Test
     public void bucketTest() {
+        super.test();
         String array[] = {"zxc", "aaz", "azz", "ldf", "ior", "oiw", "pwo", "aaa" };
         System.out.println(Arrays.toString(array));
         RadixSort.sortBucket(array);
@@ -18,6 +20,7 @@ public class RadixSortTest {
 
     @Test
     public void countingTest() {
+        super.test();
         String array[] = {"zxc", "aaz", "azz", "ldf", "ior", "oiw", "pwo", "aaa" };
         System.out.println(Arrays.toString(array));
         RadixSort.sortCounting(array);
@@ -26,6 +29,7 @@ public class RadixSortTest {
 
     @Test
     public void bucketSortMsd() throws Exception {
+        super.test();
         java.util.List<String> lst = new ArrayList<>( );
         Random r = new Random( );
 

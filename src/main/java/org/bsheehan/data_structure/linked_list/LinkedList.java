@@ -18,17 +18,17 @@ public class LinkedList <K,V> {
         }
     }
 
+    public LinkedList() {
+        this.head = null;
+        this.tail = null;
+    }
+
     public LinkedList(K key, V value) {
         this.head = new Node<K,V>(key, value);
         this.tail = this.head;
     }
 
-    public void addFront(K key, V value){
-        Node<K,V> node = new Node<K,V>(key, value);
-        node.next = head;
-        head.prev = node;
-        this.head = node;
-    }
+
 
     public void remove(K key){
         Node<K,V> curr = this.head;
@@ -92,31 +92,55 @@ public class LinkedList <K,V> {
 
     }
 
+    public void addFront(K key, V value){
+        Node<K,V> node = new Node<K,V>(key, value);
+        if (this.head != null) {
+            node.next = head;
+            head.prev = node;
+            this.head = node;
+        } else {
+            head = node;
+            tail = node;
+        }
+    }
+
     public void addBack(K key, V value){
         Node<K,V> node = new Node<K,V>(key, value);
-        node.prev = tail;
-        tail.next = node;
-        this.tail = node;
+        if (tail != null) {
+            node.prev = tail;
+            tail.next = node;
+            this.tail = node;
+        } else {
+            this.tail = node;
+            this.head = node;
+        }
     }
 
     public V removeFront() {
-        V removed = this.head.value;
-        this.head = this.head.next;
-        if (this.head != null)
-            this.head.prev = null;
-        else
-            this.tail = null;
-        return removed;
+        if (this.head != null) {
+            V removed = this.head.value;
+            this.head = this.head.next;
+            if (this.head != null)
+                this.head.prev = null;
+            else
+                this.tail = null;
+            return removed;
+        }
+
+        return null;
     }
 
     public V removeBack() {
-        V removed = this.tail.value;
-        this.tail = this.tail.prev;
-        if (this.tail != null)
-            this.tail.next = null;
-        else
-            this.head = null;
-        return removed;
+        if (this.tail != null) {
+            V removed = this.tail.value;
+            this.tail = this.tail.prev;
+            if (this.tail != null)
+                this.tail.next = null;
+            else
+                this.head = null;
+            return removed;
+        }
+        return null;
     }
 
     public V find(K key) {

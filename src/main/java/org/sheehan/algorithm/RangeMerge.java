@@ -51,15 +51,15 @@ public class RangeMerge {
         }
     }
 
-//    with stack
+//    with queue
 //    1. SortArray the intervals based on increasing order of starting time.
-//    2. Push the first interval on to a stack.
+//    2. Push the first interval on to a queue.
 //    3. For each interval do the following
-//      a. If the current interval does not overlap with the stack top, push it.
-//      b. If the current interval overlaps with stack top and ending
-//          time of current interval is more than that of stack top,
-//          update stack top with the ending  time of current interval.
-//    4. At the end stack contains the merged intervals.
+//      a. If the current interval does not overlap with the queue top, push it.
+//      b. If the current interval overlaps with queue top and ending
+//          time of current interval is more than that of queue top,
+//          update queue top with the ending  time of current interval.
+//    4. At the end queue contains the merged intervals.
     public Stack<Range> sort(Range ranges[]){
 
         Arrays.sort(ranges);
@@ -69,7 +69,7 @@ public class RangeMerge {
             if (stack.peek() == null)
                 stack.push(range); //initial range
             else {
-                Range top = stack.peek(); // look at most recent stack range
+                Range top = stack.peek(); // look at most recent queue range
                 if (top.overlaps(range)){ //compare to iterated range
                     top.merge(range); //update top range
                 }else {
@@ -80,7 +80,7 @@ public class RangeMerge {
         return stack;
     }
 
-    // without stack
+    // without queue
     public List<Range> sort2(Set<Range> ranges){
 
         //convert to sorted List, Set cannot be sorted.

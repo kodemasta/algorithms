@@ -214,7 +214,7 @@ public class BinaryTree<K extends Comparable<? super K>, V> {
         if (node == null)
             return;
 
-        // accumulate path for this stack frame
+        // accumulate path for this queue frame
         path += node.key.toString() + " ";
         // we have reached and end path node so add the accumlated path here
         if (node.left==null && node.right==null)
@@ -229,7 +229,7 @@ public class BinaryTree<K extends Comparable<? super K>, V> {
         if (node == null)
             return;
 
-        // accumulate path for this stack frame
+        // accumulate path for this queue frame
         sum += node.key;
         // we have reached and end path node so add the accumlated path here
         if (node.left==null && node.right==null)

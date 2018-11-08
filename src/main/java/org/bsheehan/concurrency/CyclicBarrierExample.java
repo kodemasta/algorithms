@@ -1,4 +1,4 @@
-package org.sheehan.algorithm.thread;
+package org.bsheehan.concurrency;
 
 import java.util.concurrent.*;
 
@@ -40,7 +40,7 @@ public class CyclicBarrierExample {
     }
 
     public static void main(String []args) throws InterruptedException, BrokenBarrierException {
-        
+
         // **************************
         CyclicBarrier barrier = new CyclicBarrier(5, () -> System.out.println("BARRIER TRIPPED"));
 

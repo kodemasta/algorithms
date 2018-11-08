@@ -9,7 +9,7 @@ import org.sheehan.algorithm.data_structures.stack.StackArrayImpl;
 /**
  * Created by bob on 7/8/14.
  *
- * DFS - stack - mark after pop
+ * DFS - queue - mark after pop
  *
  * no shortest paths
  */
@@ -22,7 +22,7 @@ public class DFS {
         this.graph = graph;
     }
 
-    // recursion simulates explicit use of stack with runtime function stack
+    // recursion simulates explicit use of queue with runtime function queue
     public void visitRecursion(GraphNode v){
         v.visited = true;
         for(GraphNode node: graph.getNeighbors(v)){
@@ -32,18 +32,18 @@ public class DFS {
     }
 
 
-    // use a stack for DFS - SAME AS BFS with stack instead of queue
+    // use a queue for DFS - SAME AS BFS with queue instead of stack
     public void visitIterative(GraphNode sourceNode){;
         Stack<GraphNode> stack = new StackArrayImpl<>(this.graph.getNumV());
         stack.push(sourceNode);
-        sourceNode.visited = true; // mark after adding to queue
+        sourceNode.visited = true; // mark after adding to stack
         while (stack.peek() != null) {
             GraphNode node = stack.pop();
             List<GraphNode> neighbors = graph.getNeighbors(node);
             for (GraphNode neighbor: neighbors){
                 if (!neighbor.visited) {
                     stack.push(neighbor);
-                    neighbor.visited = true; // mark after adding to queue
+                    neighbor.visited = true; // mark after adding to stack
                     neighbor.distance = node.distance+1;
                 }
             }
