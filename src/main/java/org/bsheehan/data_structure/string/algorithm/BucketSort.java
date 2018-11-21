@@ -1,8 +1,5 @@
 package org.bsheehan.data_structure.string.algorithm;
 
-import org.bsheehan.data_structure.array.algorithms.sort.InsertionSort;
-import org.sheehan.algorithm.data_structures.queue.QueueInterface;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;

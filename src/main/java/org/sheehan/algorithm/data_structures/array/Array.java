@@ -90,6 +90,8 @@ public class Array {
         int left = firstIndex;
         int right = lastIndex;
         while(left < right){
+
+            // Move pointer in from ends until we get a swap candidate
             while (left < array.length && array[left] <= pivot ){
                 ++left;
             }

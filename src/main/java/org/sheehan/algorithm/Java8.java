@@ -146,9 +146,9 @@ public class Java8 {
         val = "test".equals("test");
         System.out.println("\"test\".equals(\"test\") " + val);
         val = new String("test") == (new String("test"));
-        System.out.println("new String(\"test\")==(new String(\"test\")) " + val);
+        System.out.println("new StringAlgs(\"test\")==(new StringAlgs(\"test\")) " + val);
         val = new String("test").equals(new String("test"));
-        System.out.println("new String(\"test\").equals(new String(\"test\")) " + val);
+        System.out.println("new StringAlgs(\"test\").equals(new StringAlgs(\"test\")) " + val);
 
 
 

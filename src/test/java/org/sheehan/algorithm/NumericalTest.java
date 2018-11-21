@@ -13,7 +13,7 @@ public class NumericalTest {
     @Test
     public void testRobot(){
         List<String> strings = Numerical.robotPaths(1);
-//        for (String s:strings){
+//        for (StringAlgs s:strings){
 //            System.out.println(s);
 //        }
         System.out.println("number of paths: "+ strings.size());
@@ -30,7 +30,7 @@ public class NumericalTest {
 
 //    @Test
 //    public void testCntAndSay(){
-//        String s = "1";
+//        StringAlgs s = "1";
 //        for (int i=0; i<5;++i){
 //            s = Numerical.countAndSay(s);
 //            System.out.println(s);

@@ -38,7 +38,7 @@ public class DFS {
                 // add edge to mst
                 mst.addNode(node.id, node.value);
                 mst.addNode(neighbor.id, neighbor.value);
-                mst.addEdge(node.id, neighbor.id, 1);
+                mst.addEdge(node.id, neighbor.id, 1, true);
 
                 mst(g, neighbor.id, mst);
             }

@@ -15,20 +15,16 @@ package org.bsheehan.data_structure.string.algorithm;
 // and to "less than", "greater than" or "lexicographic order" comparison predicates,
 // whereas comparison sorts accommodates different orders."
 
-import org.sheehan.algorithm.data_structures.ListImpl;
-import org.sheehan.algorithm.data_structures.queue.QueueArrayImpl;
-import org.sheehan.algorithm.data_structures.queue.QueueInterface;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class RadixSort {
 
     // radix sort using bucket sort as subroutine, BASE 256 ASCII chars
-    public static void sortBucket(String arr[]) {
+    public static void sortBucket(java.lang.String arr[]) {
 
         Integer maxLength = Integer.MIN_VALUE;
-        for (String s: arr)
+        for (java.lang.String s: arr)
             maxLength = (maxLength < s.length()) ? s.length():maxLength;
 
         // LSD for string means getting length and moving back to 0th position
@@ -62,7 +58,7 @@ public class RadixSort {
     // 3c. Each pass reset input array to new order determined by alpha buckets
     // 3d. By the time you are down the last rightmost char input array will be reset to sorted ordered
 
-    public static void sortBucketMsd(String []words, int maxLen ) {
+    public static void sortBucketMsd(String[]words, int maxLen ) {
 
         java.util.List<java.util.List<String>> lengthBuckets = new ArrayList<List<String>>();
 

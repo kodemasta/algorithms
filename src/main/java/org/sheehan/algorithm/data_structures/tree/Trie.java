@@ -61,7 +61,7 @@ public class Trie {
      * prefix
      *
      * @param prefix
-     * @return a List containing String objects containing the words in
+     * @return a List containing StringAlgs objects containing the words in
      * the Trie with the given prefix.
      */
     public List getWords(String prefix) {
@@ -137,7 +137,7 @@ public class Trie {
         }
 
         /**
-         * Returns a List of String objects which are lower in the
+         * Returns a List of StringAlgs objects which are lower in the
          * hierarchy that this node.
          *
          * @return
@@ -166,13 +166,13 @@ public class Trie {
 
 
         /**
-         * Gets the String that this node represents.
+         * Gets the StringAlgs that this node represents.
          * <p/>
          * For example, if this node represents the character t, whose parent
          * <p/>
          * represents the charater a, whose parent represents the character
          * <p/>
-         * c, then the String would be "cat".
+         * c, then the StringAlgs would be "cat".
          *
          * @return
          */

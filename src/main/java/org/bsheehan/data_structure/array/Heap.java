@@ -2,12 +2,15 @@ package org.bsheehan.data_structure.array;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiPredicate;
+import java.util.function.IntBinaryOperator;
+import java.util.function.ToIntBiFunction;
 
 public class Heap<V extends Comparable> {
     static int idCnt = 0;
 
     ///////////////////////////////////////////////
-    public class Node<V extends Comparable> implements Comparable<Node> {
+    public static class Node<V extends Comparable> implements Comparable<Node> {
         Integer id;
         V value;
 
@@ -31,12 +34,13 @@ public class Heap<V extends Comparable> {
 
     List<Node<V>> array;
 
-    static <V extends Comparable<V>> Heap<V> createHeap(V array[]) {
-        return new Heap<V>(HeapType.MAX_HEAP, array);
+    public static <V extends Comparable<V>> Heap<V> createHeap(V array[], HeapType type) {
+        return new Heap<V>(type, array);
     }
 
     private Heap(HeapType heapType, V arr[]) {
         this.heapType = heapType;
+
         this.array = new ArrayList<Node<V>>(arr.length);
 
         for (int i = 0; i < arr.length; ++i) {
@@ -46,7 +50,10 @@ public class Heap<V extends Comparable> {
 
     public void add(V value){
         this.array.add(new Node<V>(value));
-        bubbleUp(this.array.size()-1);
+        if (heapType==HeapType.MAX_HEAP)
+            bubbleUp(this.array.size()-1, Heap::maxHeapCompare);
+        else
+            bubbleUp(this.array.size()-1, Heap::minHeapCompare);
     }
 
     // pop then swap with last and bubble down from top to satisfy heap property
@@ -57,8 +64,10 @@ public class Heap<V extends Comparable> {
         swap(0, this.array.size()-1);
 
         this.array.remove(this.array.size()-1);
-        if (this.array.size() > 0)
-            bubbleDown(0);
+        if (this.array.size() > 0 && this.heapType == HeapType.MAX_HEAP)
+            bubbleDown(0, Heap::maxHeapCompare);
+        else if (this.array.size() > 0 && this.heapType == HeapType.MIN_HEAP)
+            bubbleDown(0, Heap::minHeapCompare);
 
         return value;
     }
@@ -85,7 +94,7 @@ public class Heap<V extends Comparable> {
 
     //recursive from node index i up to root.
     //bubble up
-    protected void bubbleUp(int i) {
+    protected void bubbleUp(int i, BiPredicate<Node<V>, Node<V>> cmp) {
         int parentIndex = parent(i);
         if (parentIndex == -1)
             return;
@@ -95,21 +104,18 @@ public class Heap<V extends Comparable> {
         boolean swap = false;
 
         if (parent != null) {
-            if (this.heapType == HeapType.MAX_HEAP && parent.compareTo(child) < 0)
-                swap = true;
-            else if (this.heapType == HeapType.MIN_HEAP && parent.compareTo(child) > 0)
+            if (cmp.test(parent,child))
                 swap = true;
         }
 
         if (swap) {
             swap(parentIndex, i);
-            bubbleUp(parentIndex); //recurse upward toward root
+            bubbleUp(parentIndex, cmp); //recurse upward toward root
         }
     }
 
-    //recursive from node index i up to root.
-    //bubble up
-    protected void bubbleDown(int i) {
+    //recursive from node index i
+    protected void bubbleDown(int i, BiPredicate<Node<V>, Node<V>> cmp) {
         int leftChildIndex = this.leftChild(i);
         int rightChildIndex = this.rightChild(i);
         Node<V> leftChild = null;
@@ -118,31 +124,27 @@ public class Heap<V extends Comparable> {
         Node<V> rightChild = null;
         if (rightChildIndex < this.array.size())
             rightChild = this.array.get(rightChildIndex);
-        Node<V> parent = this.array.get(i);
+        Node<V> node = this.array.get(i);
 
         if (leftChild != null && rightChild == null) {
-            if (this.heapType == HeapType.MAX_HEAP && parent.compareTo(leftChild) < 0) {
+            if (cmp.test(node, leftChild)) {
                 swap(leftChildIndex, i);
-                bubbleDown(leftChildIndex);
-            } else if (this.heapType == HeapType.MIN_HEAP && parent.compareTo(leftChild) > 0) {
-                swap(leftChildIndex, i);
-                bubbleDown(leftChildIndex);
+                bubbleDown(leftChildIndex, cmp);
             }
         } else if (rightChild != null && leftChild == null) {
-            if (this.heapType == HeapType.MAX_HEAP && parent.compareTo(rightChild) < 0) {
+            if (cmp.test(node, rightChild)) {
                 swap(rightChildIndex, i);
-                bubbleDown(rightChildIndex);
-            } else if (this.heapType == HeapType.MIN_HEAP && parent.compareTo(rightChild) > 0) {
-                swap(rightChildIndex, i);
-                bubbleDown(rightChildIndex);
+                bubbleDown(rightChildIndex, cmp);
             }
         } else if (rightChild != null && leftChild != null) { //swap with larger of children
             if (rightChild.value.compareTo(leftChild.value) > 0){
-                swap(rightChildIndex, i);
-                bubbleDown(rightChildIndex);
-            } else {
+                if (cmp.test(node, rightChild)) {
+                    swap(rightChildIndex, i);
+                    bubbleDown(rightChildIndex, cmp);
+                }
+            } else if (node.compareTo(leftChild) < 0) {
                 swap(leftChildIndex, i);
-                bubbleDown(leftChildIndex);
+                bubbleDown(leftChildIndex, cmp);
             }
         }
     }
@@ -171,9 +173,15 @@ public class Heap<V extends Comparable> {
             if (this.rightChild(j) < this.array.size())
                 rightChild = this.array.get(this.rightChild(j));
 
+
+            BiPredicate<V, V> cmp;
+            if (heapType == HeapType.MAX_HEAP)
+                cmp = (V v1,V v2) -> v1.compareTo(v2) >= 0;
+            else
+                cmp = (V v1,V v2) -> v1.compareTo(v2) <= 0;
             boolean isHeap = false;
-            isHeap = (leftChild != null) && parent.value.compareTo(leftChild.value) >= 0;
-            isHeap |= (rightChild != null) && parent.value.compareTo(rightChild.value) >= 0;
+            isHeap = (leftChild != null) && cmp.test(parent.value, leftChild.value);
+            isHeap |= (rightChild != null) &&  cmp.test(parent.value, rightChild.value);
 
             return isHeap;
         }
@@ -220,4 +228,11 @@ public class Heap<V extends Comparable> {
         System.out.println("\n" + dots + dots); // dotted bottom line
     }  // end displayHeap()
 
+    public static <V extends Comparable<Node<V>>> boolean maxHeapCompare(Node<V> n1, Node<V> n2){
+        return n1.compareTo(n2) < 0;
+    }
+
+    public static  <V extends Comparable<Node<V>>> boolean minHeapCompare(Node<V> n1, Node<V> n2){
+        return n1.compareTo(n2) > 0;
+    }
 }

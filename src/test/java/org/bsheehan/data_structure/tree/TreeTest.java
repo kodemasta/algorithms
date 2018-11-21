@@ -27,6 +27,5 @@ public class TreeTest extends BaseTest {
             tree.visitInOrder(s-> System.out.println(s));
             System.out.println();
             tree.visitPostOrder(s-> System.out.println(s));
-
         }
-}
+    }

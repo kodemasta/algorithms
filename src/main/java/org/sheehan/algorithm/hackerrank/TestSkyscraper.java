@@ -7,7 +7,7 @@
 //
 //public class TestSkyscraper {
 //
-//    public static void main(String[] args) throws IOException {
+//    public static void main(StringAlgs[] args) throws IOException {
 //        //INPUT
 //        Scanner in = new Scanner(System.in);
 //        int num = in.nextInt();

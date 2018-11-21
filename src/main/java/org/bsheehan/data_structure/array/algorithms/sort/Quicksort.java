@@ -32,11 +32,20 @@ import org.bsheehan.data_structure.array.Array;
 
 import java.util.Random;
 
+// partition-exchange sort
+// When implemented well, it can be about two or three times faster than its main competitors, merge sort and heapsort.
+// quicksort exhibits poor performance for inputs that contain many repeated elements.
+// The values equal to the pivot are already sorted, so only the less-than and greater-than partitions need to be recursively sorted.
+// In pseudocode, the quicksort algorithm becomes
 public class Quicksort {
 
     public static void sort(int arr[])
     {
         quicksort(arr,0,arr.length - 1);
+    }
+    public static void sort3way(int arr[])
+    {
+        quicksort3way(arr,0,arr.length - 1);
     }
 
     public static int select(int arr[], int k)
@@ -47,9 +56,20 @@ public class Quicksort {
     private static void quicksort(int[] arr, int lo, int hi) {
         if (lo < hi) {
             int pivotIndex = lo + new Random().nextInt(hi - lo);
-            int partitionIndex = partition(arr, pivotIndex, lo, hi);
+            // the partition index will only be determined after partition is complete
+            int partitionIndex = Array.partition(arr, pivotIndex, lo, hi);
             quicksort(arr, lo, partitionIndex - 1);
             quicksort(arr, partitionIndex + 1, hi);
+        }
+    }
+
+    private static void quicksort3way(int[] arr, int lo, int hi) {
+        if (lo < hi) {
+            int pivotIndex = lo + new Random().nextInt(hi - lo);
+            // the partition index will only be determined after partition is complete
+            int partitionIndex = Array.partition3way(arr, pivotIndex, lo, hi);
+            quicksort3way(arr, lo, partitionIndex - 1);
+            quicksort3way(arr, partitionIndex + 1, hi);
         }
     }
 
@@ -59,7 +79,7 @@ public class Quicksort {
     public static int quickselect(int[] arr, int lo, int hi, int k){
         if (lo <= hi) {
             int pivotIndex = hi;
-            int partitionIndex = partition(arr, pivotIndex, lo, hi );
+            int partitionIndex = Array.partition(arr, pivotIndex, lo, hi );
             if (partitionIndex == k)
                 return arr[partitionIndex]; //kth smallest value selected
             else if (k < partitionIndex)
@@ -71,21 +91,5 @@ public class Quicksort {
         return -1;
     }
 
-    // median of medians pivot selection guarantees O(n) instead of just average (which has worst O(n2)
-    public static int partition(int arr[], int pivotIndex, int firstIndex, int lastIndex){
-        int pivot = arr[pivotIndex];
-        Array.swap(arr, pivotIndex, lastIndex); // save pivot
 
-        // only swap to left if smaller than pivot
-        int storeIndex = firstIndex;
-        for (int i = firstIndex; i < lastIndex; i++){
-            if (arr[i] <= pivot){
-                Array.swap(arr, i, storeIndex);
-                storeIndex++;
-            }
-        }
-        Array.swap(arr, storeIndex, lastIndex); // put back in place pivot
-
-        return storeIndex;
-    }
 }

@@ -8,6 +8,7 @@ public class BaseTest {
     public TestName name= new TestName();
 
     public void test() {
+        System.out.println();
         System.out.println("---TEST:" + this.name.getMethodName());
     }
 }

@@ -1,7 +1,10 @@
 package org.bsheehan.data_structure.tree;
 
-import org.sheehan.algorithm.data_structures.tree.BinaryTree;
+import org.bsheehan.data_structure.queue.ListQueue;
+import org.bsheehan.data_structure.stack.ListStack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class Tree <V> {
@@ -17,6 +20,14 @@ public class Tree <V> {
         public Node(Integer id, V value){
             this.id = id;
             this.value = value;
+            this.parent = null;
+            this.left = null;
+            this.right = null;
+        }
+
+        public Node(){
+            this.id = 0;
+            this.value = null;
             this.parent = null;
             this.left = null;
             this.right = null;
@@ -115,6 +126,10 @@ public class Tree <V> {
         visitPostOrder(this.root, op);
     }
 
+    public void visitLevelOrder(Consumer op) { visitLevelOrder(this.root, op); }
+
+    public void visitLevelZigZagOrder(Consumer op) { visitLevelZigZagOrder(this.root, op); }
+
     private void visitInOrder(Node<V> node, Consumer op) {
         if (node == null)
             return;
@@ -138,6 +153,76 @@ public class Tree <V> {
         visitInOrder(node.left, op);
         visitInOrder(node.right, op);
         op.accept(node.id);
+    }
+
+    // use queue, and mark end of level with null
+    // this uses a marker to delimit the levels, however not required
+    private void visitLevelOrder(Node<V> node, Consumer op) {
+
+        ListQueue<Node<V>> queue = new ListQueue<>();
+        queue.enqueue(node);
+        queue.enqueue(null); // mark end of level
+        while (queue.size() != 0) {
+            Node<V> n = queue.dequeue();
+            if (n != null) {
+                op.accept(n.id);
+                if (n.left != null)
+                    queue.enqueue(n.left);
+                if (n.right != null)
+                    queue.enqueue(n.right);
+            } else if (queue.size() != 0) {//special case: do not do at end of tree
+                op.accept(" - ");
+                queue.enqueue(null); // mark end of level
+            }
+        }
+    }
+
+    // use queue, and mark end of level with null
+    private void visitLevelZigZagOrder(Node<V> node, Consumer op) {
+        ListQueue<Node<V>> queue = new ListQueue<>();
+        queue.enqueue(node);
+        queue.enqueue(null); // mark end of level
+        List<Node<V>> list = new ArrayList<>();
+        list.add(node);
+        list.add(null);
+        while (queue.size() != 0) {
+            Node<V> n = queue.dequeue();
+            if (n != null) {
+                if (n.left != null) {
+                    queue.enqueue(n.left);
+                    list.add(n.left);
+                }
+                if (n.right != null) {
+                    queue.enqueue(n.right);
+                    list.add(n.right);
+                }
+            } else { // new level yo !
+                if (queue.size() != 0) { //special case: do not do at end of tree
+                    queue.enqueue(null); // mark end of level
+                    list.add(null);
+                }
+            }
+        }
+
+        boolean reverse = false;
+        ListStack<Node<V>> stack = new ListStack<>();
+        for (Node<V> n: list) {
+            if (n != null) {
+                if (reverse)
+                    stack.push(n);
+                else
+                    op.accept(n.id);
+            } else {
+                if (reverse) {
+                    while (stack.size() != 0){
+                        op.accept(stack.pop().id);
+                    }
+                }
+                reverse  = !reverse;
+                op.accept(" - ");
+            }
+
+        }
     }
 
     public int getMaxDepth() {

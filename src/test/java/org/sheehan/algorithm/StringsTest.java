@@ -52,13 +52,13 @@ public class StringsTest {
 
     @Test
     public void testPermutations() throws Exception {
-//        String testStr = "ABC";
+//        StringAlgs testStr = "ABC";
 //
-//        Set<String> cache = new HashSet<String>();
+//        Set<StringAlgs> cache = new HashSet<StringAlgs>();
 //
 //        Strings.getPermutations("", "ABC", cache);
 //
-//        for (String s: cache)
+//        for (StringAlgs s: cache)
 //            System.out.println(s);
 //
 //        cache.clear();
@@ -68,7 +68,7 @@ public class StringsTest {
 //            list.add(c);
 //        Strings.getPermutations2(list, 0, cache);
 //
-//        for (String s: cache)
+//        for (StringAlgs s: cache)
 //            System.out.println(s);
 
         Set<String> perms = Strings.getPermutationsRecursive("ABCD");

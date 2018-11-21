@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class BinarySearchTest  extends BaseTest {
+public class BinarySearchTest extends BaseTest {
 
     @Test
     public void test() {

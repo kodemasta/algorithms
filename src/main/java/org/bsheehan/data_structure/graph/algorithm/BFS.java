@@ -47,7 +47,7 @@ import java.util.List;
 
                     mst.addNode(node.id, node.value);
                     mst.addNode(neighbor.id, neighbor.value);
-                    mst.addEdge(node.id, neighbor.id, 1);
+                    mst.addEdge(node.id, neighbor.id, 1, true);
 
                 }
             }

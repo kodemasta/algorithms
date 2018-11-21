@@ -31,4 +31,14 @@ public class QuicksortTest extends BaseTest{
         System.out.println("K Select Value:" + kVal);
         Assert.assertEquals("Kth Matches", aCopy[k], kVal);
     }
+
+    @Test
+    public void test3Way() {
+        super.test();
+        int[] a = {0,1,2,0,1,2,0,1,2,0,1,2};
+        Array.print(a);
+        Quicksort.sort3way(a);
+        Array.print(a);
+        Assert.assertTrue("Sorted", Array.isSorted(a, true));
+    }
 }

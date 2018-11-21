@@ -11,11 +11,11 @@ import static org.junit.Assert.*;
 public class HeapTest  extends BaseTest {
 
     @Test
-    public void test() {
+    public void testMaxHeap() {
         super.test();
         int a[] = Array.create(Array.ArrayType.LINEAR_UNSORTED, 10, 10);
         Array.print(a);
-        Heap<Integer> heap = Heap.createHeap(Arrays.stream(a).boxed().toArray(Integer[]::new));
+        Heap<Integer> heap = Heap.createHeap(Arrays.stream(a).boxed().toArray(Integer[]::new), Heap.HeapType.MAX_HEAP);
 
         heap.print();
 
@@ -23,11 +23,22 @@ public class HeapTest  extends BaseTest {
     }
 
     @Test
+    public void testMinHeap() {
+        super.test();
+        int a[] = Array.create(Array.ArrayType.LINEAR_UNSORTED, 10, 10);
+        Array.print(a);
+        Heap<Integer> heap = Heap.createHeap(Arrays.stream(a).boxed().toArray(Integer[]::new), Heap.HeapType.MIN_HEAP);
+
+        heap.print();
+
+        Assert.assertTrue("Is Heap", heap.isHeap());
+    }
+    @Test
     public void testRemove() {
         super.test();
         int a[] = Array.create(Array.ArrayType.LINEAR_UNSORTED, 10, 10);
         Array.print(a);
-        Heap<Integer> heap = Heap.createHeap(Arrays.stream(a).boxed().toArray(Integer[]::new));
+        Heap<Integer> heap = Heap.createHeap(Arrays.stream(a).boxed().toArray(Integer[]::new), Heap.HeapType.MAX_HEAP);
         Assert.assertTrue("Is Heap", heap.isHeap());
         heap.print();
 

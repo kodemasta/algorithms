@@ -46,7 +46,7 @@ public class RadixSortTest extends BaseTest{
             lst.add( str );
         }
 
-        String []arr1 = new String[ lst.size( ) ];
+        String[]arr1 = new String[ lst.size( ) ];
 
         lst.toArray( arr1 );
 
