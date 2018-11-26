@@ -4,18 +4,15 @@ import org.bsheehan.BaseTest;
 import org.bsheehan.data_structure.array.Array;
 import org.junit.Test;
 
-
-import static org.junit.Assert.*;
-
-public class ThreeWayPartitionTest extends BaseTest {
+public class PositiveNegativeTest extends BaseTest {
 
     @Test
     public void test() {
         super.test();
-        int[] arr = Array.create(Array.ArrayType.RANDOM_UNSORTED, 3, 10);
+        int[] arr = Array.create(Array.ArrayType.RANDOM_UNSORTED, -10, 10, 10);
 
         Array.print(arr);
-        ThreeWayPartition.partition(arr, 0, 1);
+        PositiveNegative.partition(arr);
         Array.print(arr);
     }
 }

@@ -7,6 +7,7 @@ import java.util.*;
 
 public class Array {
 
+
     public enum ArrayType {
         RANDOM_UNSORTED,
         RANDOM_SORTED,
@@ -25,6 +26,7 @@ public class Array {
         int arr[] = new int[size];
 
         switch (type) {
+
             case RANDOM_UNSORTED:
                 Random rand = new Random();
                 for (int i=0; i < size; ++i){
@@ -76,45 +78,57 @@ public class Array {
 
     // median of medians pivot selection guarantees O(n) instead of just average (which has worst O(n2)
     // whenever arr[i] is <= pivotVal swap !!!
-    public static int partition(int arr[], int pivotIndex, int lo, int hi){
+    public static int partitionSwapPivotIndex(int arr[], int pivotIndex, int lo, int hi){
         int pivotVal = arr[pivotIndex];
-        Array.swap(arr, pivotIndex, hi); // save pivot at hi for later to swap back !
+        Array.swap(arr, pivotIndex, hi); // save pivot at hi for later to swap back to correct position
+
+        int partitionIndex = partition(arr, pivotVal, lo, hi-1);
+
+        Array.swap(arr, hi, partitionIndex); // save pivot at hi for later to swap back to correct position
+        return partitionIndex; //partition index used for next recursion
+    }
+
+    // swap if val < pivot val increment store index
+    public static int partition(int arr[], int pivotVal, int lo, int hi){
 
         // 1. save position where SMALLER value will be swapped to
-        int lt = lo;
-        for (int i = lo; i < hi; i++){
+        int store = lo;
+        for (int i = lo; i <= hi; i++){
             // 2. if we find a smaller value than pivot at some point then store it at saved position
             if (arr[i] <= pivotVal){
-                Array.swap(arr, i, lt);
-                lt++; // 3. increment lt to maintain invariant that left part of array is partitioned
+                Array.swap(arr, i, store);
+                store++; // 3. increment store to maintain invariant that left part of array is partitioned
             }
         }
-        Array.swap(arr, lt, hi); // put back in place pivot
-
-        return lt; //partition index used for next recursion
+        return store; //partition index used for next recursion
     }
 
     // The values equal to the pivot are already sorted, so only the less-than and greater-than partitions need to be recursively sorted.
     // In pseudocode, the quicksort algorithm becomes
-    public static int partition3way(int arr[], int pivotIndex, int lo, int hi){
-        int pivotVal = arr[pivotIndex];
-        Array.swap(arr, pivotIndex, hi); // save pivot at hi for later to swap back !
 
-        // 1. save position where SMALLER value will be swapped to
-        int lt = lo;
-        int gt = hi;
-        for (int i = lo; i < hi; i++){
-            if (arr[i] < pivotVal){
-                Array.swap(arr, i, lt);
-                lt++; // 3. increment lt to maintain invariant that left part of array is partitioned
-            } else if (arr[i] < pivotVal){
-                Array.swap(arr, i, gt);
-                gt--; // 3. increment lt to maintain invariant that left part of array is partitioned
+    // Dutch National Flag Algorithm
+    // a[1..lo-1] < pivot (red)
+    // a[lo..mid-1] pivot (white)
+    // a[mid..hi] ???
+    // a[hi+1..n] > pivot (blue)
+    public static int partition3way(int arr[], int pivotVal, int lo, int hi){
+
+        int i = lo; // i is the mid counter
+
+        while(i <= hi ) { // when unknown region is 0 length !!!
+            if (arr[i] < pivotVal ){
+                Array.swap(arr, i, lo);
+                ++lo;
+                ++i;
+            } else if (arr[i] == pivotVal){
+                ++i;
+            } else if (arr[i] > pivotVal) {
+                Array.swap(arr, i, hi);
+                --hi;
             }
         }
-        Array.swap(arr, lt, hi); // put back in place pivot
 
-        return lt; //partition index used for next recursion
+        return lo; //partition index used for next recursion
     }
 
     public static void swap(int[] arr, int i, int j) {
@@ -148,6 +162,20 @@ public class Array {
                 return b;
             });
         }
+    }
+
+    public static boolean isParitioned(int[] arr, int partitionIndex, int pivotVal) {
+
+        for (int i = 0; i < arr.length; i++) {
+            if (i < partitionIndex)
+                if (arr[i] > pivotVal)
+                    return false;
+            else if (i > partitionIndex)
+                if (arr[i] <= pivotVal)
+                    return false;
+        }
+
+        return true;
     }
 
     public static void shiftLeft(int[] arr, int pos){

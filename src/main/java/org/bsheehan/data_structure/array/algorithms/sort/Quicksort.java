@@ -55,9 +55,9 @@ public class Quicksort {
 
     private static void quicksort(int[] arr, int lo, int hi) {
         if (lo < hi) {
-            int pivotIndex = lo + new Random().nextInt(hi - lo);
+            int pivotIndex = lo;//lo + new Random().nextInt(hi - lo);
             // the partition index will only be determined after partition is complete
-            int partitionIndex = Array.partition(arr, pivotIndex, lo, hi);
+            int partitionIndex = Array.partitionSwapPivotIndex(arr, pivotIndex, lo, hi);
             quicksort(arr, lo, partitionIndex - 1);
             quicksort(arr, partitionIndex + 1, hi);
         }
@@ -66,8 +66,7 @@ public class Quicksort {
     private static void quicksort3way(int[] arr, int lo, int hi) {
         if (lo < hi) {
             int pivotIndex = lo + new Random().nextInt(hi - lo);
-            // the partition index will only be determined after partition is complete
-            int partitionIndex = Array.partition3way(arr, pivotIndex, lo, hi);
+            int partitionIndex = Array.partition3way(arr,  arr[pivotIndex], lo, hi);
             quicksort3way(arr, lo, partitionIndex - 1);
             quicksort3way(arr, partitionIndex + 1, hi);
         }
@@ -79,7 +78,7 @@ public class Quicksort {
     public static int quickselect(int[] arr, int lo, int hi, int k){
         if (lo <= hi) {
             int pivotIndex = hi;
-            int partitionIndex = Array.partition(arr, pivotIndex, lo, hi );
+            int partitionIndex = Array.partitionSwapPivotIndex(arr, pivotIndex, lo, hi );
             if (partitionIndex == k)
                 return arr[partitionIndex]; //kth smallest value selected
             else if (k < partitionIndex)

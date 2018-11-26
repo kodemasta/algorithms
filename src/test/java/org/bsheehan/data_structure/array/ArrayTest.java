@@ -1,6 +1,7 @@
 package org.bsheehan.data_structure.array;
 
 import org.bsheehan.BaseTest;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -46,10 +47,35 @@ public class ArrayTest extends BaseTest {
 
     @Test
     public void testPartition(){
-        int arr[] = Array.create(Array.ArrayType.RANDOM_UNSORTED_UNIQUE, 10,10);
-        Array.print(arr);
-        System.out.println("pivot:" + arr[5]);
-        Array.partition(arr, 5, 0, arr.length-1);
-        Array.print(arr);
+
+        super.test();
+        int pivotVal = 5;
+        for (int i = 0; i < 100; i++) {
+
+            int[] arr = Array.create(Array.ArrayType.RANDOM_UNSORTED, 11, 9);
+
+            Array.print(arr);
+            int partitionIndex = Array.partition(arr, pivotVal, 0, arr.length - 1);
+            Array.print(arr);
+            System.out.println("partition index:" + partitionIndex);
+            System.out.println();
+            Assert.assertTrue("partitioned", Array.isParitioned(arr, partitionIndex, pivotVal));
+         }
+    }
+
+    @Test
+    public void testPartition3Way() {
+        super.test();
+        int pivotVal = 1;
+        for (int i = 0; i < 100; i++) {
+
+            int[] arr = Array.create(Array.ArrayType.RANDOM_UNSORTED, 3, 15);
+
+            Array.print(arr);
+            int partitionIndex = Array.partition3way(arr, pivotVal, 0, arr.length - 1);
+            Array.print(arr);
+            Assert.assertTrue("paritioned", Array.isParitioned(arr, partitionIndex, pivotVal));
+
+        }
     }
 }
