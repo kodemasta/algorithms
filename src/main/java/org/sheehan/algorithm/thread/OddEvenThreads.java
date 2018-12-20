@@ -6,6 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 class OddEvenThreads implements Runnable {
 
+
     private int max;
     private PrintMonitor print;
     private boolean isEvenNumber;
@@ -70,7 +71,8 @@ class PrintMonitor {
                     e.printStackTrace();
                 }
             }
-            System.out.print(number + " ");
+            // isOdd now true
+            System.out.print(" " + number + " " +  Thread.currentThread().getName());
             isOdd = false;
             oddCondition.signal();
         } finally {
@@ -89,7 +91,7 @@ class PrintMonitor {
                     e.printStackTrace();
                 }
             }
-            System.out.print(number + " ");
+            System.out.print(" " + number + " "  + Thread.currentThread().getName());
             isOdd = true;
             evenCondition.signal();
         } finally {

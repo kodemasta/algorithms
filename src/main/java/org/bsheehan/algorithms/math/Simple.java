@@ -77,4 +77,22 @@ public class Simple {
         System.out.println("Move " + n + " from " + src + " to " + dst) ;
         hanoi(n-1, tmp, dst, src);
     }
+
+    public static int reverseInt(int n) {
+
+        long reverse = 0;
+
+        while(n != 0){
+            long digit = n%10;
+            reverse = reverse*10 + digit;
+            n /= 10;
+        }
+
+        if (reverse < Integer.MIN_VALUE)
+            return Integer.MIN_VALUE;
+        if (reverse > Integer.MAX_VALUE)
+            return Integer.MAX_VALUE;
+
+        return (int)reverse;
+    }
 }

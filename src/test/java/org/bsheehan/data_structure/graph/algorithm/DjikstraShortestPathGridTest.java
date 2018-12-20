@@ -21,7 +21,7 @@ public class DjikstraShortestPathGridTest extends BaseTest {
 
         DjikstraShortestPath.findShortestPathTreeBasic(grid, src);
         List<Integer> shortestPath = DjikstraShortestPath.getShortestPath(grid, dst);
-        System.out.println("shortest path from 0 to 11:" + shortestPath.toString());
+        System.out.println("shortest path from " +  src + " to " + dst + " :" + shortestPath.toString());
         grid.printGrid(dim);
     }
 

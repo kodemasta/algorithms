@@ -3,12 +3,12 @@ package org.bsheehan.algorithms.backtracking;
 import org.bsheehan.BaseTest;
 import org.junit.Test;
 
-public class EightQueensTest extends BaseTest {
+public class NQueensTest extends BaseTest {
 
     @Test
     public void test() {
         super.test();
-        EightQueens game = new EightQueens();
+        NQueens game = new NQueens();
         game.placeQueen(0);
         game.printBoard();
     }

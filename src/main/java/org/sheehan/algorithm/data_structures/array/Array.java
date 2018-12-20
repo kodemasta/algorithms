@@ -281,7 +281,7 @@ public class Array {
         System.out.println();
     }
 
-    // brute force is compute every pair look at +- profit and take max (O(n^2))
+    // findSums force is compute every pair look at +- profit and take max (O(n^2))
     /*int profit = Integer.MIN_VALUE;
     for(int i=0; i<prices.length-1; i++){
         for(int j=0; j< prices.length; j++){
@@ -719,15 +719,11 @@ public class Array {
         int left = 0, right = 0;
 
         for (int i = 1; i < array.length; ++i){
-
-            if (array[i] > soln[i-1]+ array[i]){
-                soln[i] = array[i];
+            int candidate = soln[i-1]+ array[i];
+            soln[i] = Math.max(array[i], candidate);
+            if (array[i] > candidate)
                 left = i;
-            } else {
-                soln[i] = soln[i-1]+ array[i];
-            }
 
-            soln[i] = Math.max(array[i], soln[i-1]+ array[i]);
             if (soln[i] > maxSum){
                 maxSum = soln[i];
                 right = i;

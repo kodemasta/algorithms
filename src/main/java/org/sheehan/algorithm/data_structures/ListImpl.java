@@ -228,15 +228,15 @@ public class ListImpl <T extends Comparable<T>> implements List<T> {
         while (curr != null) {
             if (data.compareTo(curr.data) < 0) {
                 insertBefore(data, cnt);
-                return;
+                return; //done
             }
             cnt++;
             curr = curr.next;
         }
-        appendBack(data);
+        appendBack(data); // greater than all existing elems so add at back
     }
 
-    //brute force
+    //brute_n_3 force
     @Override
     public void reverseBrute() {
 

@@ -1,6 +1,6 @@
 package org.bsheehan.algorithms.backtracking;
 
-public class EightQueens {
+public class NQueens {
     // each row has a single queen at which column
     int queenColumns[] = new int[8];
 
@@ -52,6 +52,7 @@ public class EightQueens {
 
         // check each column in current row.. recurses on every permutation !
         for (int col = 0; col < 8; ++col){
+            // NED TO BE CAREFUL AND BREAK LATER ONCE WE HAVE GOOD COLUMN
             this.queenColumns[row] = col; //candidate.. there may be several that succeed here !
             if (checkRow(row)) {
                 System.out.println("GOOD:"+row + "-" + col);

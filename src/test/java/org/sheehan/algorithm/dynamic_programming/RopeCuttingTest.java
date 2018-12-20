@@ -7,16 +7,16 @@ public class RopeCuttingTest {
     @Test
     public void testMaxProductRecursive() throws Exception {
 
-        System.out.println(RopeCutting.maxProductRecursive(8));
-        System.out.println(RopeCutting.maxProductRecursive(10));
+        System.out.println(RopeCuttingMaxProduct.recursive(8));
+        System.out.println(RopeCuttingMaxProduct.recursive(10));
 
     }
 
     @Test
     public void testMaxProductDynamic() throws Exception {
 
-        System.out.println(RopeCutting.maxProductDynamic(8));
-        System.out.println(RopeCutting.maxProductDynamic(10));
+        System.out.println(RopeCuttingMaxProduct.dp(8));
+        System.out.println(RopeCuttingMaxProduct.dp(10));
 
     }
 }

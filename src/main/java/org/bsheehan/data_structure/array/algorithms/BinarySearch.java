@@ -10,7 +10,7 @@ public class BinarySearch {
         int end = arr.length-1;
 
         while (start <= end) {
-            int middle = start + (end-start)/2;
+            int middle = start + (end-start)/2; ///careful of int overflow (start+end)/2
             if (arr[middle] > key) {
                 end = middle-1;
             }  else if (arr[middle] < key) {

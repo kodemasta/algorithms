@@ -17,13 +17,13 @@ public class BFSTest extends BaseTest{
         g.addNode(3,"d");
         g.addNode(4,"e");
         g.addNode(5,"f");
-        g.addEdge(0,1,1, true);
-        g.addEdge(1,2,1, true);
-        g.addEdge(2,0,1, true);
-        g.addEdge(0,2,1, true);
-        g.addEdge(1,1,1, true);
-        g.addEdge(1,4,1, true);
-        g.addEdge(4,5,1, true);
+        g.addDirectedEdge(0,1,1);
+        g.addDirectedEdge(1,2,1);
+        g.addDirectedEdge(2,0,1);
+        g.addDirectedEdge(0,2,1);
+        g.addDirectedEdge(1,1,1);
+        g.addDirectedEdge(1,4,1);
+        g.addDirectedEdge(4,5,1);
         g.print();
         BFS.visit(g, 0);
 
@@ -44,15 +44,15 @@ public class BFSTest extends BaseTest{
         g.addNode(3,"d");
         g.addNode(4,"e");
         g.addNode(5,"f");
-        g.addEdge(0,1,1, true);
-        g.addEdge(1,2,1, true);
-        g.addEdge(2,0,1, true);
-        g.addEdge(0,2,1, true);
-        g.addEdge(1,1,1, true);
-        g.addEdge(1,4,1, true);
-        g.addEdge(4,5,1, true);
-        g.addEdge(5,2,1, true);
-        g.addEdge(5,3,1, true);
+        g.addUndirectedEdge(0,1,1);
+        g.addUndirectedEdge(1,2,1);
+        g.addUndirectedEdge(2,0,1);
+        g.addUndirectedEdge(0,2,1);
+        g.addUndirectedEdge(1,1,1);
+        g.addUndirectedEdge(1,4,1);
+        g.addUndirectedEdge(4,5,1);
+        g.addUndirectedEdge(5,2,1);
+        g.addUndirectedEdge(5,3,1);
         g.print();
 
         Graph mst = new Graph();

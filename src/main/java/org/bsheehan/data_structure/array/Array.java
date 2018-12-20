@@ -70,6 +70,10 @@ public class Array {
                 rand = new Random();
                 while(unique.size() < size)
                     unique.add( start + rand.nextInt(bound-start));
+                i = 0;
+                for (int val: unique){
+                    arr[i++]=val;
+                }
                 MergeSort.sort(arr);
                 break;
         }
@@ -137,14 +141,26 @@ public class Array {
         arr[j]=temp;
     }
 
-    public static void print(Integer  arr[]){
-        print(arr);
-    }
-
     public static void print(int arr[]){
         System.out.print("{ ");
-        Arrays.stream(arr).forEach((val)->System.out.print(val + " "));
+        Arrays.stream(arr).forEach((val)->System.out.print(val + ", "));
         System.out.println('}');
+    }
+
+    public static void draw(int arr[]){
+
+        for (int j = 0; j < arr.length ; j++) {
+            System.out.print(j+"|");
+            if (arr[j] <= 0) {
+                System.out.println( Integer.toString(arr[j]));
+                continue;
+            }
+            for (int i = 0; i < arr[j]-1; i++) {
+                System.out.print("=");
+            }
+            System.out.println('|' + Integer.toString(arr[j]));
+        }
+        System.out.println();
     }
 
     public static boolean isSorted(int arr[], boolean ascending){
@@ -260,4 +276,52 @@ public class Array {
             swap(arr, i, end-j);
         }
     }
+
+    public static java.lang.Integer[] union(Integer arr1[], Integer arr2[]){
+        Set<Integer> union = new HashSet<>();
+
+        union.addAll(Arrays.asList(arr1));
+
+        for (int elem: arr2) {
+            if (!union.contains(elem))
+                union.add(elem);
+        }
+        return union.toArray(new Integer[0]);
+    }
+
+    public static java.lang.Integer[] intersection(Integer arr1[], Integer arr2[]){
+        Set<Integer> intersection = new HashSet<>();
+
+        Set<Integer> set = new HashSet<>();
+        for (int elem: arr1)
+            set.add(elem);
+
+        for (int elem: arr2) {
+            if (set.contains(elem))
+                intersection.add(elem);
+        }
+        return intersection.toArray(new Integer[0]);
+    }
+
+    public static Integer[] toIntegerArray(int []arr){
+        Integer[] newArray = new Integer[arr.length];
+        int i = 0;
+        for (int value : arr) {
+            newArray[i++] = Integer.valueOf(value);
+        }
+
+        return newArray;
+    }
+
+    public static int[] toIntArray(Integer []arr){
+        int[] newArray = new int[arr.length];
+        int i = 0;
+        for (int value : arr) {
+            newArray[i++] = Integer.valueOf(value);
+        }
+
+        return newArray;
+    }
+
+
 }

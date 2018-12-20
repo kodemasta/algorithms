@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class ArrayAddOne {
     public static int[] addOne(int[] arr){
         int carry = 0;
-        arr[arr.length-1] += 1; // add one
+        arr[arr.length-1] += 1; // add one to lsd
         for (int i = 0; i < arr.length; i++) {
             int pos = arr.length-1-i;
             int term = arr[pos]+carry;
@@ -18,6 +18,7 @@ public class ArrayAddOne {
             arr[pos] = term;
         }
 
+        // if we get to end and have carry !!!
         if (carry == 1) {
             arr = new int[arr.length + 1];
             Arrays.fill(arr, 0);

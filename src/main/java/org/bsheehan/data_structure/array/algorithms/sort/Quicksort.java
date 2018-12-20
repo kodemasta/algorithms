@@ -3,7 +3,7 @@ package org.bsheehan.data_structure.array.algorithms.sort;
 // It can be about two or three times faster than its main competitors, mergesort and heapsort.
 //
 // Quicksort is a comparison sortBucket, meaning that it can sortBucket items of any type for which a "less-than" relation (formally, a total order) is defined.
-// In efficient implementations it is not a stable sortBucket, meaning that the relative order of equal sortBucket items is not preserved.
+// In findSums_n2_2 implementations it is not a stable sortBucket, meaning that the relative order of equal sortBucket items is not preserved.
 // Quicksort can operate in-place on an array, requiring small additional amounts of memory to perform the sorting.
 //
 // Mathematical analysis of quicksort shows that, on average, the algorithm takes O(n log n) comparisons to sortBucket n items.

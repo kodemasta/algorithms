@@ -126,7 +126,7 @@ public class Recursion {
     }
 
     static public void main(String[]args){
-       // Recursion.EightQueens queens = new Recursion().new EightQueens();
+       // Recursion.NQueens queens = new Recursion().new NQueens();
        // queens.placeQueen(0);
 
 

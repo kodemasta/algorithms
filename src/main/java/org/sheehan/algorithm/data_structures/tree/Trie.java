@@ -103,6 +103,7 @@ public class Trie {
         }
 
         /**
+         * recursive
          * Adds a word to this node. This method is called recursively and
          * adds child nodes for each successive letter in the word, therefore
          * recursive calls will be made with partial words.
@@ -111,17 +112,18 @@ public class Trie {
          */
         protected void addWord(String word) {
             isLeaf = false;
-            int charPos = word.charAt(0) - 'a';
+            int childNodePos = word.charAt(0) - 'a';
 
-            if (children[charPos] == null) {
-                children[charPos] = new TrieNode(word.charAt(0));
-                children[charPos].parent = this;
+            // if node already exists skip this and continue DFS
+            if (children[childNodePos] == null) {
+                children[childNodePos] = new TrieNode(word.charAt(0));
+                children[childNodePos].parent = this;
             }
 
             if (word.length() > 1) {
-                children[charPos].addWord(word.substring(1));
+                children[childNodePos].addWord(word.substring(1));
             } else {
-                children[charPos].isWord = true;
+                children[childNodePos].isWord = true;
             }
         }
 

@@ -23,6 +23,12 @@ public class DFS {
         }
     }
 
+    public static void visit(Graph g, Integer nodeId, int componentId){
+        Graph.Node node = g.getNode(nodeId);
+        node.componentId = componentId;
+        visit(g, nodeId);
+    }
+
     public static void mst(Graph g, Integer nodeId, Graph mst)
     {
         Graph.Node node = g.getNode(nodeId);
@@ -38,7 +44,7 @@ public class DFS {
                 // add edge to mst
                 mst.addNode(node.id, node.value);
                 mst.addNode(neighbor.id, neighbor.value);
-                mst.addEdge(node.id, neighbor.id, 1, true);
+                mst.addUndirectedEdge(node.id, neighbor.id, 1);
 
                 mst(g, neighbor.id, mst);
             }

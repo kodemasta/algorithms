@@ -32,7 +32,7 @@ public interface List<T extends Comparable<T>> extends Iterable<T> {
 
     void appendBack(T value);
 
-    //brute force
+    //brute_n_3 force
     void reverseBrute();
 
     void reverse();

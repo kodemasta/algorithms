@@ -16,14 +16,14 @@ public class DFSTest {
         g.addNode(3,"c");
         g.addNode(4,"d");
         g.addNode(5,"e");
-        g.addEdge(0,1,1, true);
-        g.addEdge(1,2,1, true);
-        g.addEdge(2,0,1, true);
-        g.addEdge(0,2,1, true);
-        g.addEdge(1,1,1, true);
-        g.addEdge(2,0,1, true);
-        g.addEdge(1,4,1, true);
-        g.addEdge(4,5,1, true);
+        g.addUndirectedEdge(0,1,1);
+        g.addUndirectedEdge(1,2,1);
+        g.addUndirectedEdge(2,0,1);
+        g.addUndirectedEdge(0,2,1);
+        g.addUndirectedEdge(1,1,1);
+        g.addUndirectedEdge(2,0,1);
+        g.addUndirectedEdge(1,4,1);
+        g.addUndirectedEdge(4,5,1);
         g.print();
         DFS.visit(g, 0);
 
@@ -43,15 +43,15 @@ public class DFSTest {
         g.addNode(3,"d");
         g.addNode(4,"e");
         g.addNode(5,"f");
-        g.addEdge(0,1,1, true);
-        g.addEdge(1,2,1, true);
-        g.addEdge(2,0,1, true);
-        g.addEdge(0,2,1, true);
-        g.addEdge(1,1,1, true);
-        g.addEdge(1,4,1, true);
-        g.addEdge(4,5,1, true);
-        g.addEdge(5,2,1, true);
-        g.addEdge(5,3,1, true);
+        g.addUndirectedEdge(0,1,1);
+        g.addUndirectedEdge(1,2,1);
+        g.addUndirectedEdge(2,0,1);
+        g.addUndirectedEdge(0,2,1);
+        g.addUndirectedEdge(1,1,1);
+        g.addUndirectedEdge(1,4,1);
+        g.addUndirectedEdge(4,5,1);
+        g.addUndirectedEdge(5,2,1);
+        g.addUndirectedEdge(5,3,1);
         g.print();
 
         Graph mst = new Graph();

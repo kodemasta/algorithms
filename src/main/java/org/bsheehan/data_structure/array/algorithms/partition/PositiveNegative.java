@@ -8,32 +8,19 @@ public class PositiveNegative {
         int left = 0;
         int right = arr.length-1;
 
-        Array.partition(arr, -1, left, right);
+        // partition <0 to left
+        int partitionIndex = Array.partition(arr, -1, left, right);
+        Array.print(arr);
+        System.out.println("partition index:" + partitionIndex);
 
+        // can only interleave if we have enough
+        int lim = Math.min(partitionIndex, arr.length-partitionIndex);
 
-
-
-//        // group < 0 to left
-//        for (int i = 0; i < arr.length; ++i){
-//            if ( left < right) {
-//                while (arr[left] < 0) {
-//                    ++left; // pass by all neg
-//                }
-//                while (arr[right] > 0) {
-//                    --right; // pass by all pos
-//                }
-//
-//                if (left < right) {
-//                    Array.swap(arr, left, right);
-//                }
-//            }
-//        }
-
-        // interleave
-//        for (int i = 0; i < arr.length; ++i){
-//            if (i%2 == 1) {
-//                Array.swap(arr, i,  ++left);
-//            }
-//        }
+        // interleave at partition boundary
+        for (int i = 0; i < lim; ++i){
+            if (i%2 == 1) {
+                Array.swap(arr, i,  partitionIndex++);
+            }
+        }
     }
 }

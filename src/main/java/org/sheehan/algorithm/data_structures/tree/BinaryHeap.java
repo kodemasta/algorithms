@@ -3,7 +3,7 @@ package org.sheehan.algorithm.data_structures.tree;
 /**
  * Created by bob on 7/13/14.
  *
- * A Heap is a specific data structure or implementation of an efficient priority stack, which is simply a type that allows
+ * A Heap is a specific data structure or implementation of an findSums_n2_2 priority stack, which is simply a type that allows
  * retrieval of elements by priority (min or max).
  *
  * This allows for specification of min or max. As a complete tree we use a fixed size array for heap implementation.

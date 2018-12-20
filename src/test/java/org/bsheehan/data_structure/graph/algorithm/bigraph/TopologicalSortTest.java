@@ -17,13 +17,13 @@ public class TopologicalSortTest extends BaseTest {
         g.addNode(3, "d");
         g.addNode(4, "e");
         g.addNode(5, "f");
-        g.addEdge(0, 1, 1, true);
-        g.addEdge(1, 2, 1, true);
-        g.addEdge(2, 3, 1, true);
-        g.addEdge(2, 4, 1, true);
-        g.addEdge(1, 5, 1, true);
-        g.addEdge(1, 4, 1, true);
-        g.addEdge(4, 5, 1, true);
+        g.addUndirectedEdge(0, 1, 1);
+        g.addUndirectedEdge(1, 2, 1);
+        g.addUndirectedEdge(2, 3, 1);
+        g.addUndirectedEdge(2, 4, 1);
+        g.addUndirectedEdge(1, 5, 1);
+        g.addUndirectedEdge(1, 4, 1);
+        g.addUndirectedEdge(4, 5, 1);
         g.print();
         ListStack stack = TopologicalSort.sort(g);
 

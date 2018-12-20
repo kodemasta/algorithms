@@ -315,7 +315,7 @@ public class Strings {
         return null;
     }
 
-    // brute force
+    // brute_n_3 force
     public static Set<Character> findDuplicatesBrute(String str) {
 
         char[] chars = str.toCharArray();

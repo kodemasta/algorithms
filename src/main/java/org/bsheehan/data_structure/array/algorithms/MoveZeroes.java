@@ -8,8 +8,11 @@ public class MoveZeroes {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] != 0) {
                 arr[nonZeroCnt++] = arr[i];
-            }
+            } else
+                System.out.println("skipped a zero");
         }
+
+        //  fill in left over
         for (int i = nonZeroCnt; i < arr.length; i++) {
             arr[i] = 0;
         }

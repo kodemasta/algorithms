@@ -12,7 +12,7 @@ public class ReadWriteLock {
     // but welcome to have many readers if that all there is !
     synchronized void acquireReadLock() throws InterruptedException {
         while (numWriters > 0 || numWriterRequesters > 0) {
-            System.out.println(Thread.currentThread().getName() + " read lock wait");
+            System.out.println(Thread.currentThread().getName() + " read sharedLock wait");
             wait();
         }
         numReaders++;
@@ -27,7 +27,7 @@ public class ReadWriteLock {
     synchronized void acquireWriteLock() throws InterruptedException {
         numWriterRequesters++;
         while (numWriters > 0 || numReaders > 0) {
-            System.out.println(Thread.currentThread().getName() + " write lock wait");
+            System.out.println(Thread.currentThread().getName() + " write sharedLock wait");
             wait();
         }
         numWriterRequesters--;
@@ -38,7 +38,7 @@ public class ReadWriteLock {
 
     synchronized void releaseReadLock() {
 
-        System.out.println(Thread.currentThread().getName() + " read lock release");
+        System.out.println(Thread.currentThread().getName() + " read sharedLock release");
         --numReaders;
         notifyAll();
         this.print();
@@ -46,7 +46,7 @@ public class ReadWriteLock {
     }
 
     synchronized void releaseWriteLock() {
-        System.out.println(Thread.currentThread().getName() + " write lock release");
+        System.out.println(Thread.currentThread().getName() + " write sharedLock release");
         --numWriters;
         notifyAll();
         this.print();

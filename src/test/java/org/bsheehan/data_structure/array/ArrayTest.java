@@ -4,6 +4,8 @@ import org.bsheehan.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class ArrayTest extends BaseTest {
@@ -75,7 +77,19 @@ public class ArrayTest extends BaseTest {
             int partitionIndex = Array.partition3way(arr, pivotVal, 0, arr.length - 1);
             Array.print(arr);
             Assert.assertTrue("paritioned", Array.isParitioned(arr, partitionIndex, pivotVal));
-
         }
+    }
+
+    @Test
+    public void testUnionIntersection() {
+        super.test();
+
+        int[] arr1 = Array.create(Array.ArrayType.LINEAR_SORTED, 5, 15, 10);
+        int[] arr2 = Array.create(Array.ArrayType.LINEAR_SORTED, 10, 10);
+
+        Array.print(arr1);
+        Array.print(arr2);
+        Array.print(Array.toIntArray(Array.union(Array.toIntegerArray(arr1), Array.toIntegerArray(arr2))));
+        Array.print(Array.toIntArray(Array.intersection(Array.toIntegerArray(arr1), Array.toIntegerArray(arr2))));
     }
 }
